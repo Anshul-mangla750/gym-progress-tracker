@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 import { PageHeader } from '../components/layout/PageHeader';
 import { VolumeChart } from '../components/progress/VolumeChart';
 import { BodyWeightChart } from '../components/progress/BodyWeightChart';
+import { ActivityStats } from '../components/progress/ActivityStats';
 import { Card, CardHeader } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Modal } from '../components/ui/Modal';
@@ -12,7 +13,7 @@ import { Plus, Trophy, Dumbbell } from 'lucide-react';
 import { getTodayString } from '../lib/date-utils';
 
 export function Progress() {
-  const { bodyWeights, sessions, logBodyWeight } = useProgress();
+  const { bodyWeights, sessions, meals, logBodyWeight } = useProgress();
   const { user } = useAuth();
   const unit = user?.unitPreference || 'kg';
 
@@ -27,7 +28,7 @@ export function Progress() {
     if (isNaN(val) || val <= 0) return;
 
     await logBodyWeight({
-      userId: 'user_1',
+      userId: user?.id || '',
       date: weightDate,
       weight: val,
       unit,
@@ -58,6 +59,8 @@ export function Progress() {
           </Button>
         }
       />
+
+      <ActivityStats sessions={sessions} meals={meals} unit={unit} />
 
       {/* Charts Grid */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">

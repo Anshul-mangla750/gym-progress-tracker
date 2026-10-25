@@ -7,12 +7,13 @@ interface DayIndicator {
 }
 
 interface StreakCardProps {
-  streakDays?: number;
+  streakDays: number;
   daysOfWeek: DayIndicator[];
   className?: string;
 }
 
-export function StreakCard({ streakDays = 4, daysOfWeek, className = '' }: StreakCardProps) {
+export function StreakCard({ streakDays, daysOfWeek, className = '' }: StreakCardProps) {
+  const daysToMilestone = 7 - (streakDays % 7 || 0);
   return (
     <div
       className={`dashboard-streak-card w-full sm:w-auto md:w-72 rounded-2xl p-4 sm:p-5 shrink-0 z-10 space-y-3.5 ${className}`}
@@ -27,7 +28,7 @@ export function StreakCard({ streakDays = 4, daysOfWeek, className = '' }: Strea
           </span>
           <span className="text-[11px] text-[#667085] font-medium flex items-center gap-1 mt-0.5">
             <Zap size={11} className="text-[#FF7A00] fill-[#FF7A00]" />
-            <span>3 days to Spark ⚡</span>
+            <span>{daysToMilestone} {daysToMilestone === 1 ? 'day' : 'days'} to Spark</span>
           </span>
         </div>
       </div>
@@ -52,3 +53,5 @@ export function StreakCard({ streakDays = 4, daysOfWeek, className = '' }: Strea
     </div>
   );
 }
+
+

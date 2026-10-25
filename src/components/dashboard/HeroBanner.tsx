@@ -28,7 +28,7 @@ interface HeroBannerProps {
 export function HeroBanner({
   userName = 'Alex',
   dayName = 'Push Day (Chest, Shoulders & Triceps)',
-  streakDays = 4,
+  streakDays = 0,
   daysOfWeek = DEFAULT_DAYS_OF_WEEK,
 }: HeroBannerProps) {
   return (
@@ -71,3 +71,4 @@ export function HeroBanner({
     </div>
   );
 }
+

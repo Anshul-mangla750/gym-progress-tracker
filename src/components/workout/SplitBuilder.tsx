@@ -5,6 +5,7 @@ import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { SplitDayEditor } from './SplitDayEditor';
 import { Plus } from 'lucide-react';
+import { useAuth } from '../../hooks/useAuth';
 
 interface SplitBuilderProps {
   isOpen: boolean;
@@ -19,6 +20,7 @@ export function SplitBuilder({
   onSave,
   initialSplit,
 }: SplitBuilderProps) {
+  const { user } = useAuth();
   const [name, setName] = useState(initialSplit?.name || '');
   const [description, setDescription] = useState(initialSplit?.description || '');
   const [days, setDays] = useState<WorkoutDay[]>(
@@ -60,7 +62,7 @@ export function SplitBuilder({
     setIsSaving(true);
     try {
       await onSave({
-        userId: 'user_1',
+        userId: user?.id || '',
         name,
         description,
         isTemplate: false,

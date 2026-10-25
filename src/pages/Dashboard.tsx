@@ -15,6 +15,7 @@ import { WorkoutCard } from '../components/dashboard/WorkoutCard';
 import { NutritionCard } from '../components/dashboard/NutritionCard';
 import { QuickActionCards } from '../components/dashboard/QuickActionCards';
 import { toast } from 'sonner';
+import { getPastDates, getTodayString } from '../lib/date-utils';
 
 const DEFAULT_EXERCISES = [
   { id: 'ex_1', exerciseName: 'Barbell Bench Press', tags: ['Chest', 'Triceps', 'Shoulders'], prescription: '4 sets × 6–8 reps' },
@@ -63,21 +64,44 @@ export function Dashboard() {
   // Workout metrics
   const completedSessions = sessions.filter((s) => s.status === 'completed');
   const loggedVolume = completedSessions.reduce((acc, s) => acc + (s.totalVolume || 0), 0);
-  const displayVolume = (loggedVolume > 0 ? loggedVolume : 12260).toLocaleString();
-  const displayWorkouts = completedSessions.length > 0 ? completedSessions.length : 2;
-  const allTimeSessions = completedSessions.length + 26;
+  const displayVolume = loggedVolume.toLocaleString();
+  const displayWorkouts = completedSessions.length;
+  const allTimeSessions = completedSessions.length;
   const allPRs = completedSessions.flatMap((s) => s.personalRecords || []);
-  const displayPRs = allPRs.length > 0 ? allPRs.length + 8 : 12;
+  const displayPRs = allPRs.length;
 
   // Nutrition Metrics
   const targetCals = goals?.calorieTarget || 2450;
-  const currentCals = dailyTotals.calories > 0 ? dailyTotals.calories : 5068;
+  const currentCals = dailyTotals.calories;
   const targetProtein = goals?.proteinTarget || 175;
-  const currentProtein = dailyTotals.protein > 0 ? dailyTotals.protein : 915;
+  const currentProtein = dailyTotals.protein;
   const targetCarbs = goals?.carbTarget || 260;
-  const currentCarbs = dailyTotals.carbs > 0 ? dailyTotals.carbs : 214;
+  const currentCarbs = dailyTotals.carbs;
   const targetFat = goals?.fatTarget || 65;
-  const currentFat = dailyTotals.fat > 0 ? dailyTotals.fat : 65;
+  const currentFat = dailyTotals.fat;
+
+  const workoutDates = new Set(completedSessions.map((session) => {
+    const date = session.completedAt || session.startedAt;
+    return date.slice(0, 10);
+  }));
+  const recentDates = getPastDates(7);
+  const streakDays = (() => {
+    let count = 0;
+    const today = getTodayString();
+    const dateCursor = new Date(`${workoutDates.has(today) ? today : getPastDates(2)[0]}T12:00:00`);
+    let date = `${dateCursor.getFullYear()}-${String(dateCursor.getMonth() + 1).padStart(2, '0')}-${String(dateCursor.getDate()).padStart(2, '0')}`;
+    while (workoutDates.has(date)) {
+      count += 1;
+      dateCursor.setDate(dateCursor.getDate() - 1);
+      date = `${dateCursor.getFullYear()}-${String(dateCursor.getMonth() + 1).padStart(2, '0')}-${String(dateCursor.getDate()).padStart(2, '0')}`;
+    }
+    return count;
+  })();
+  const daysOfWeek = recentDates.map((date) => ({
+    label: new Date(`${date}T12:00:00`).toLocaleDateString(undefined, { weekday: 'narrow' }),
+    completed: workoutDates.has(date),
+    text: String(Number(date.slice(-2))),
+  }));
 
   const nextDay = activeSplit?.days[0];
 
@@ -100,14 +124,14 @@ export function Dashboard() {
   return (
     <div className="elite-dashboard space-y-3.5 sm:space-y-4 animate-fade-in w-full pb-12">
       {/* ── C. Hero Banner (Modular with StreakCard and Flex Flow Cutout) ── */}
-      <HeroBanner userName={user?.displayName || 'Alex'} />
+      <HeroBanner userName={user?.displayName || 'Athlete'} streakDays={streakDays} daysOfWeek={daysOfWeek} />
 
       {/* ── D. Four Statistic Cards (Modular Grid) ── */}
       <StatCardsGrid
         displayVolume={displayVolume}
         displayWorkouts={displayWorkouts}
         allTimeSessions={allTimeSessions}
-        streakDays={4}
+        streakDays={streakDays}
         displayPRs={displayPRs}
       />
 
@@ -163,3 +187,5 @@ export function Dashboard() {
     </div>
   );
 }
+
+

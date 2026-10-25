@@ -16,6 +16,7 @@ import {
   Zap,
 } from 'lucide-react';
 import alexAvatarImg from '../../assets/alex_vance.jpg';
+import { useAuth } from '../../hooks/useAuth';
 
 interface TopBarProps {
   activeSessionName?: string;
@@ -61,6 +62,7 @@ export function TopBar({
   const [search, setSearch] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+  const { user } = useAuth();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
@@ -125,10 +127,10 @@ export function TopBar({
             </div>
             <div className="flex flex-col">
               <span className="font-heading font-black text-sm text-[#101828] tracking-tight leading-none">
-                ELITE<span className="text-[#7C3AED]">ENGINE</span>
+                VYQOR
               </span>
               <span className="text-[7.5px] uppercase tracking-widest text-[#667085] font-bold mt-0.5">
-                AI Fitness
+                Fitness
               </span>
             </div>
           </div>
@@ -273,11 +275,11 @@ export function TopBar({
             <div className="w-8 h-8 rounded-full border border-[#E9E4F0] overflow-hidden shrink-0 shadow-2xs">
               <img
                 src={alexAvatarImg}
-                alt="Alex Vance"
+                alt={user?.displayName || user?.name || 'VYQOR athlete'}
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="hidden sm:inline font-semibold text-xs sm:text-[13px] text-[#101828]">Alex Vance</span>
+            <span className="hidden sm:inline font-semibold text-xs sm:text-[13px] text-[#101828]">{user?.displayName || user?.name || 'Athlete'}</span>
             <ChevronDown size={14} className="text-[#667085] hidden sm:inline" />
           </button>
         </div>

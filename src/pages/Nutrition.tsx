@@ -9,8 +9,10 @@ import { MEAL_TYPES } from '../lib/constants';
 import { formatDate, getTodayString } from '../lib/date-utils';
 import { subDays, addDays, parseISO, isToday } from 'date-fns';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useAuth } from '../hooks/useAuth';
 
 export function Nutrition() {
+  const { user } = useAuth();
   const {
     selectedDate,
     setSelectedDate,
@@ -78,7 +80,7 @@ export function Nutrition() {
     } else {
       const newMeal: MealLog = {
         id: `meal_${Date.now()}`,
-        userId: 'user_1',
+        userId: user?.id || '',
         date: selectedDate,
         mealType: activeMealType,
         items: [item],

@@ -1,21 +1,24 @@
 import { useState, useEffect, useCallback } from 'react';
-import type { BodyWeightEntry, WorkoutSession } from '../types';
+import type { BodyWeightEntry, MealLog, WorkoutSession } from '../types';
 import { mockApi } from '../api/mock-adapter';
 
 export function useProgress() {
   const [bodyWeights, setBodyWeights] = useState<BodyWeightEntry[]>([]);
   const [sessions, setSessions] = useState<WorkoutSession[]>([]);
+  const [meals, setMeals] = useState<MealLog[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const loadData = useCallback(async () => {
     setIsLoading(true);
     try {
-      const [weights, allSessions] = await Promise.all([
+      const [weights, allSessions, allMeals] = await Promise.all([
         mockApi.getBodyWeights(),
         mockApi.getSessions(),
+        mockApi.getAllMeals(),
       ]);
       setBodyWeights(weights);
       setSessions(allSessions);
+      setMeals(allMeals);
     } catch (err) {
       console.error('Failed to load progress data:', err);
     } finally {
@@ -47,6 +50,7 @@ export function useProgress() {
   return {
     bodyWeights,
     sessions,
+    meals,
     isLoading,
     refresh: loadData,
     logBodyWeight,

@@ -14,6 +14,7 @@ import type {
   ExerciseSession,
 } from '../types';
 import { mockApi } from '../api/mock-adapter';
+import { useAuth } from './AuthContext';
 
 interface WorkoutContextType {
   session: WorkoutSession | null;
@@ -33,6 +34,7 @@ interface WorkoutContextType {
 const WorkoutContext = createContext<WorkoutContextType | null>(null);
 
 export function WorkoutProvider({ children }: { children: ReactNode }) {
+  const { user } = useAuth();
   const [session, setSession] = useState<WorkoutSession | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState<number>(0);
 
@@ -71,7 +73,7 @@ export function WorkoutProvider({ children }: { children: ReactNode }) {
 
   const startWorkout = useCallback(
     async (day: WorkoutDay, splitName: string = 'Custom Split', splitId?: string) => {
-      const user = await mockApi.getUser();
+      if (!user) return;
       const unit = user.unitPreference || 'kg';
 
       const exercises: ExerciseSession[] = day.exercises.map((pe, idx) => {
@@ -116,11 +118,11 @@ export function WorkoutProvider({ children }: { children: ReactNode }) {
       setSession(newSession);
       setElapsedSeconds(0);
     },
-    []
+    [user]
   );
 
   const startEmptyWorkout = useCallback(async (name: string = 'Quick Workout') => {
-    const user = await mockApi.getUser();
+    if (!user) return;
     const newSession: WorkoutSession = {
       id: `sess_${Date.now()}`,
       userId: user.id,
@@ -135,7 +137,7 @@ export function WorkoutProvider({ children }: { children: ReactNode }) {
 
     setSession(newSession);
     setElapsedSeconds(0);
-  }, []);
+  }, [user]);
 
   const updateSet = useCallback(
     (exerciseIndex: number, setIndex: number, updates: Partial<SetLog>) => {
@@ -189,8 +191,7 @@ export function WorkoutProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const addExerciseToSession = useCallback(async (exercise: Exercise) => {
-    const user = await mockApi.getUser();
-    const unit = user.unitPreference || 'kg';
+    const unit = user?.unitPreference || 'kg';
 
     setSession((prev) => {
       if (!prev) return null;
@@ -214,7 +215,7 @@ export function WorkoutProvider({ children }: { children: ReactNode }) {
         updatedAt: new Date().toISOString(),
       };
     });
-  }, []);
+  }, [user]);
 
   const removeExerciseFromSession = useCallback((exerciseIndex: number) => {
     setSession((prev) => {

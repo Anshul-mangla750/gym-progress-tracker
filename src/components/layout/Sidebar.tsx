@@ -13,6 +13,7 @@ import {
   Sparkles,
   X,
   Play,
+  LogOut,
 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { useActiveWorkout } from '../../hooks/useActiveWorkout';
@@ -38,7 +39,7 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { to: '/', label: 'Home', icon: Home },
+  { to: '/dashboard', label: 'Dashboard', icon: Home },
   { to: '/workouts', label: 'Workouts', icon: Dumbbell },
   { to: '/nutrition', label: 'Food & Macros', icon: UtensilsCrossed },
   { to: '/community', label: 'Community', icon: Users, badge: '24k', badgeColor: 'bg-amber-50 text-amber-700 border-amber-200' },
@@ -55,7 +56,7 @@ export function Sidebar({
   onOpenGoalPace,
   onOpenHelp,
 }: SidebarProps) {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { session, elapsedSeconds } = useActiveWorkout();
   const navigate = useNavigate();
 
@@ -78,16 +79,16 @@ export function Sidebar({
           onClick={handleNavClick}
           className="flex items-center gap-3.5 group focus:outline-none"
         >
-          {/* Green rounded-square lightning logo */}
+          {/* VYQOR brand mark */}
           <div className="w-10 h-10 rounded-xl bg-[#7C3AED] flex items-center justify-center text-white font-extrabold shadow-xs group-hover:scale-105 transition-transform shrink-0">
             <Zap className="w-5 h-5 fill-white stroke-white shrink-0" />
           </div>
           <div className="flex flex-col min-w-0">
             <span className="font-heading font-black text-lg tracking-tight text-[#101828] leading-none">
-              ELITE<span className="text-[#7C3AED]">ENGINE</span>
+              VYQOR
             </span>
-            <span className="text-[9px] text-[#667085] uppercase tracking-widest font-extrabold mt-1">
-              AI FITNESS COMPANION
+            <span className="text-[7px] text-[#667085] uppercase tracking-[0.11em] font-extrabold mt-1">
+              VISION · YOUR QUEST · OVERCOME · RESULTS
             </span>
           </div>
         </NavLink>
@@ -260,17 +261,19 @@ export function Sidebar({
 
       {/* ── User Profile & Pro Athlete Dock ────────────────────── */}
       <div className="p-3.5 border-t border-[#E9E4F0] shrink-0 bg-white">
-        <div
+        <div className="flex items-center gap-1">
+        <button
+          type="button"
           onClick={() => {
             if (onOpenGoalPace) onOpenGoalPace();
             handleNavClick();
           }}
-          className="flex items-center gap-3.5 p-2 rounded-xl hover:bg-[#FBFAFD] transition-colors cursor-pointer"
+          className="flex min-w-0 flex-1 items-center gap-3.5 p-2 rounded-xl hover:bg-[#FBFAFD] transition-colors cursor-pointer text-left"
         >
           <div className="relative w-9 h-9 rounded-full border border-[#E9E4F0] overflow-hidden shrink-0 shadow-2xs">
             <img
               src={alexAvatarImg}
-              alt="Alex Vance"
+              alt={user?.displayName || user?.name || 'VYQOR athlete'}
               className="w-full h-full object-cover"
             />
             <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#7C3AED] border-2 border-white"></span>
@@ -286,6 +289,20 @@ export function Sidebar({
             </span>
           </div>
           <Settings size={15} className="text-[#667085] hover:text-[#101828] shrink-0" />
+        </button>
+        <button
+          type="button"
+          aria-label="Sign out"
+          title="Sign out"
+          onClick={async () => {
+            await logout();
+            navigate('/auth', { replace: true });
+            handleNavClick();
+          }}
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-[#777184] transition hover:bg-rose-50 hover:text-rose-600"
+        >
+          <LogOut size={16} />
+        </button>
         </div>
       </div>
     </aside>

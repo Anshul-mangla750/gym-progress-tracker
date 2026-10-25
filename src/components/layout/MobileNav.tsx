@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 
 const mobileNavItems = [
-  { to: '/', label: 'Home', icon: Home },
+  { to: '/dashboard', label: 'Home', icon: Home },
   { to: '/workouts', label: 'Workouts', icon: Dumbbell },
   { to: '/nutrition', label: 'Food', icon: UtensilsCrossed },
   { to: '/splits', label: 'Plan', icon: CalendarDays },
@@ -27,7 +27,7 @@ export function MobileNav() {
             <NavLink
               key={item.to}
               to={item.to}
-              end={item.to === '/'}
+              end={item.to === '/dashboard'}
               className={({ isActive }) => `
                 flex w-full min-w-0 flex-col items-center justify-center py-1.5 px-1 rounded-xl text-[10px] font-bold transition-all
                 ${

@@ -1,11 +1,11 @@
 {
-  "name": "EliteEngine — AI Fitness & Progressive Overload",
-  "short_name": "EliteEngine",
-  "description": "Your AI Fitness Companion, Progressive Overload Engine, and Macro Nutrition Platform",
-  "start_url": "/",
+  "name": "VYQOR — Vision Your Quest Overcome Results",
+  "short_name": "VYQOR",
+  "description": "Train with purpose, track your nutrition, and see your progress.",
+  "start_url": "/dashboard",
   "display": "standalone",
-  "background_color": "#0A0A0A",
-  "theme_color": "#F97316",
+  "background_color": "#FBFAFD",
+  "theme_color": "#7C3AED",
   "icons": [
     {
       "src": "/favicon.svg",

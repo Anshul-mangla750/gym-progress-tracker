@@ -45,7 +45,7 @@ export function AddToHomeScreenModal({ isOpen, onClose }: AddToHomeScreenModalPr
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Add EliteEngine to Home Screen"
+      title="Add VYQOR to Home Screen"
       description="Enjoy the full app experience with instant loading, offline workouts, and full-screen display."
       maxWidth="md"
     >
@@ -151,7 +151,7 @@ export function AddToHomeScreenModal({ isOpen, onClose }: AddToHomeScreenModalPr
                 4
               </span>
               <div className="text-xs text-text-secondary leading-relaxed">
-                Tap <strong className="text-accent-primary font-bold">Install</strong> to add EliteEngine directly to your launcher.
+                Tap <strong className="text-accent-primary font-bold">Install</strong> to add VYQOR directly to your launcher.
               </div>
             </div>
 

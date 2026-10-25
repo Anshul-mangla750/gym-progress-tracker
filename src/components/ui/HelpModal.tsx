@@ -38,7 +38,7 @@ export function HelpModal({ isOpen, onClose }: HelpModalProps) {
               <span>How does Progressive Overload work?</span>
             </div>
             <p className="text-neutral-600 text-xs leading-relaxed">
-              EliteEngine automatically monitors your completed sets. When you hit the top of your target rep range with proper form, Jimm AI prompts a 2.5kg or 1-rep increase on your next workout.
+              VYQOR automatically monitors your completed sets. When you hit the top of your target rep range with proper form, Jimm AI prompts a 2.5kg or 1-rep increase on your next workout.
             </p>
           </div>
 
@@ -68,7 +68,7 @@ export function HelpModal({ isOpen, onClose }: HelpModalProps) {
               <span>Need 1-on-1 Athlete Support?</span>
             </div>
             <p className="text-[#5B21B6] text-xs leading-relaxed">
-              As an athlete on EliteEngine Pro, you have direct priority access to human certified trainers and sports nutritionists.
+              As a VYQOR Pro athlete, you have direct priority access to certified trainers and sports nutritionists.
             </p>
           </div>
         </div>

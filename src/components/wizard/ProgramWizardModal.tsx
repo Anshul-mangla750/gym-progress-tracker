@@ -11,6 +11,7 @@ import {
   ArrowLeft,
 } from 'lucide-react';
 import type { WorkoutDay } from '../../types';
+import { useAuth } from '../../hooks/useAuth';
 
 interface ProgramWizardModalProps {
   isOpen: boolean;
@@ -30,6 +31,7 @@ export function ProgramWizardModal({ isOpen, onClose }: ProgramWizardModalProps)
   const [isGenerating, setIsGenerating] = useState(false);
 
   const { createSplit } = useWorkout();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const handleFinish = async () => {
@@ -105,7 +107,7 @@ export function ProgramWizardModal({ isOpen, onClose }: ProgramWizardModalProps)
       }
 
       await createSplit({
-        userId: 'user_1',
+        userId: user?.id || '',
         name: programName,
         description: programDesc,
         isTemplate: false,
@@ -129,7 +131,7 @@ export function ProgramWizardModal({ isOpen, onClose }: ProgramWizardModalProps)
       isOpen={isOpen}
       onClose={onClose}
       title="Build My Program"
-      description={`Step ${step} of ${totalSteps} • Customized EliteEngine Training Generator`}
+      description={`Step ${step} of ${totalSteps} • Customized VYQOR Training Generator`}
       maxWidth="lg"
     >
       <div className="space-y-6 pt-2">

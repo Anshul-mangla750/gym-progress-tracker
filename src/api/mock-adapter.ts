@@ -12,7 +12,7 @@ import { seedExercises } from '../data/seed-exercises';
 import { seedFoods } from '../data/seed-foods';
 import { seedSplits } from '../data/seed-splits';
 import { calculateDailyTotals } from '../lib/nutrition-calc';
-import { getTodayString, getPastDates } from '../lib/date-utils';
+import { supabase } from '../lib/supabase';
 
 const STORAGE_KEYS = {
   USER: 'eliteengine_user_v4',
@@ -59,9 +59,15 @@ const DEFAULT_GOAL: NutritionGoal = {
   createdAt: new Date().toISOString(),
 };
 
+let storageUserId: string | null = null;
+
+function scopedStorageKey(key: string): string {
+  return storageUserId ? `${key}_${storageUserId}` : key;
+}
+
 function getStorage<T>(key: string, defaultValue: T): T {
   try {
-    const raw = localStorage.getItem(key);
+    const raw = localStorage.getItem(scopedStorageKey(key));
     if (!raw) return defaultValue;
     return JSON.parse(raw) as T;
   } catch {
@@ -71,296 +77,35 @@ function getStorage<T>(key: string, defaultValue: T): T {
 
 function setStorage<T>(key: string, value: T): void {
   try {
-    localStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(scopedStorageKey(key), JSON.stringify(value));
   } catch (err) {
     console.error('Storage write error:', err);
   }
-}
 
-// Generate realistic past workout sessions so the app opens with rich historical data
-function generateSeedSessions(): WorkoutSession[] {
-  const dates = getPastDates(14);
-  const sessions: WorkoutSession[] = [];
-
-  // Completed Push session 4 days ago
-  sessions.push({
-    id: 'sess_prev_push',
-    userId: 'user_1',
-    splitId: 'split_ppl',
-    splitName: 'Push / Pull / Legs (PPL)',
-    dayName: 'Push Day (Chest, Shoulders & Triceps)',
-    status: 'completed',
-    startedAt: `${dates[4]}T10:00:00.000Z`,
-    completedAt: `${dates[4]}T11:15:00.000Z`,
-    durationSeconds: 4500,
-    totalVolume: 5840,
-    totalSets: 14,
-    totalReps: 108,
-    personalRecords: [
-      {
-        exerciseId: 'ex_1',
-        exerciseName: 'Barbell Bench Press',
-        type: 'weight',
-        value: 80,
-        previousValue: 77.5,
-      },
-    ],
-    sessionNotes: 'Strong bench press session. Hit all top rep targets on bench!',
-    createdAt: `${dates[4]}T10:00:00.000Z`,
-    updatedAt: `${dates[4]}T11:15:00.000Z`,
-    exercises: [
-      {
-        id: 'es_1',
-        exerciseId: 'ex_1',
-        exerciseName: 'Barbell Bench Press',
-        sortOrder: 1,
-        targetSets: 4,
-        targetRepsMin: 6,
-        targetRepsMax: 8,
-        sets: [
-          { id: 's1', setNumber: 1, weight: 80, weightUnit: 'kg', targetReps: 8, actualReps: 8, isCompleted: true, isPersonalRecord: true, rpe: 8 },
-          { id: 's2', setNumber: 2, weight: 80, weightUnit: 'kg', targetReps: 8, actualReps: 8, isCompleted: true, isPersonalRecord: false, rpe: 8.5 },
-          { id: 's3', setNumber: 3, weight: 80, weightUnit: 'kg', targetReps: 8, actualReps: 8, isCompleted: true, isPersonalRecord: false, rpe: 9 },
-          { id: 's4', setNumber: 4, weight: 80, weightUnit: 'kg', targetReps: 8, actualReps: 8, isCompleted: true, isPersonalRecord: false, rpe: 9.5 },
-        ],
-      },
-      {
-        id: 'es_2',
-        exerciseId: 'ex_2',
-        exerciseName: 'Incline Dumbbell Press',
-        sortOrder: 2,
-        targetSets: 3,
-        targetRepsMin: 8,
-        targetRepsMax: 10,
-        sets: [
-          { id: 's5', setNumber: 1, weight: 28, weightUnit: 'kg', targetReps: 10, actualReps: 10, isCompleted: true, isPersonalRecord: false, rpe: 8 },
-          { id: 's6', setNumber: 2, weight: 28, weightUnit: 'kg', targetReps: 10, actualReps: 9, isCompleted: true, isPersonalRecord: false, rpe: 8.5 },
-          { id: 's7', setNumber: 3, weight: 28, weightUnit: 'kg', targetReps: 10, actualReps: 8, isCompleted: true, isPersonalRecord: false, rpe: 9 },
-        ],
-      },
-      {
-        id: 'es_3',
-        exerciseId: 'ex_15',
-        exerciseName: 'Overhead Press (Barbell)',
-        sortOrder: 3,
-        targetSets: 3,
-        targetRepsMin: 6,
-        targetRepsMax: 8,
-        sets: [
-          { id: 's8', setNumber: 1, weight: 50, weightUnit: 'kg', targetReps: 8, actualReps: 8, isCompleted: true, isPersonalRecord: false, rpe: 8 },
-          { id: 's9', setNumber: 2, weight: 50, weightUnit: 'kg', targetReps: 8, actualReps: 7, isCompleted: true, isPersonalRecord: false, rpe: 8.5 },
-          { id: 's10', setNumber: 3, weight: 50, weightUnit: 'kg', targetReps: 8, actualReps: 7, isCompleted: true, isPersonalRecord: false, rpe: 9 },
-        ],
-      },
-    ],
-  });
-
-  // Completed Pull session 2 days ago
-  sessions.push({
-    id: 'sess_prev_pull',
-    userId: 'user_1',
-    splitId: 'split_ppl',
-    splitName: 'Push / Pull / Legs (PPL)',
-    dayName: 'Pull Day (Back & Biceps)',
-    status: 'completed',
-    startedAt: `${dates[2]}T17:00:00.000Z`,
-    completedAt: `${dates[2]}T18:10:00.000Z`,
-    durationSeconds: 4200,
-    totalVolume: 6420,
-    totalSets: 12,
-    totalReps: 98,
-    personalRecords: [],
-    sessionNotes: 'Great lat activation. Felt energized.',
-    createdAt: `${dates[2]}T17:00:00.000Z`,
-    updatedAt: `${dates[2]}T18:10:00.000Z`,
-    exercises: [
-      {
-        id: 'es_p1',
-        exerciseId: 'ex_8',
-        exerciseName: 'Barbell Bent-Over Row',
-        sortOrder: 1,
-        targetSets: 4,
-        targetRepsMin: 6,
-        targetRepsMax: 8,
-        sets: [
-          { id: 'sp1', setNumber: 1, weight: 70, weightUnit: 'kg', targetReps: 8, actualReps: 8, isCompleted: true, isPersonalRecord: false, rpe: 7.5 },
-          { id: 'sp2', setNumber: 2, weight: 70, weightUnit: 'kg', targetReps: 8, actualReps: 8, isCompleted: true, isPersonalRecord: false, rpe: 8 },
-          { id: 'sp3', setNumber: 3, weight: 70, weightUnit: 'kg', targetReps: 8, actualReps: 8, isCompleted: true, isPersonalRecord: false, rpe: 8.5 },
-          { id: 'sp4', setNumber: 4, weight: 70, weightUnit: 'kg', targetReps: 8, actualReps: 8, isCompleted: true, isPersonalRecord: false, rpe: 9 },
-        ],
-      },
-    ],
-  });
-
-  return sessions;
-}
-
-// Generate default meal logs for today (1,248 kcal total, realistic midday status)
-function generateSeedMeals(): MealLog[] {
-  const today = getTodayString();
-  return [
-    {
-      id: 'meal_seed_breakfast',
-      userId: 'user_1',
-      date: today,
-      mealType: 'breakfast',
-      items: [
-        {
-          id: 'item_b1',
-          foodId: 'food_1',
-          foodName: 'Oats (Dry)',
-          quantity: 80,
-          unit: 'g',
-          servingBasis: 'per 100g',
-          servingSize: 100,
-          calories: 311,
-          protein: 14,
-          carbohydrates: 53,
-          fat: 6,
-          fiber: 8,
-          addedAt: new Date().toISOString(),
-        },
-        {
-          id: 'item_b2',
-          foodId: 'food_2',
-          foodName: 'Whey Protein Isolate',
-          quantity: 35,
-          unit: 'g',
-          servingBasis: 'per scoop (35g)',
-          servingSize: 35,
-          calories: 130,
-          protein: 27,
-          carbohydrates: 2,
-          fat: 1,
-          fiber: 0,
-          addedAt: new Date().toISOString(),
-        },
-      ],
-      totalCalories: 441,
-      totalProtein: 41,
-      totalCarbs: 55,
-      totalFat: 7,
-      totalFiber: 8,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    },
-    {
-      id: 'meal_seed_lunch',
-      userId: 'user_1',
-      date: today,
-      mealType: 'lunch',
-      items: [
-        {
-          id: 'item_l1',
-          foodId: 'food_3',
-          foodName: 'Chicken Breast (Cooked)',
-          quantity: 180,
-          unit: 'g',
-          servingBasis: 'per 100g',
-          servingSize: 100,
-          calories: 297,
-          protein: 56,
-          carbohydrates: 0,
-          fat: 6,
-          fiber: 0,
-          addedAt: new Date().toISOString(),
-        },
-        {
-          id: 'item_l2',
-          foodId: 'food_4',
-          foodName: 'Cooked White Rice',
-          quantity: 200,
-          unit: 'g',
-          servingBasis: 'per 100g',
-          servingSize: 100,
-          calories: 260,
-          protein: 5,
-          carbohydrates: 56,
-          fat: 1,
-          fiber: 1,
-          addedAt: new Date().toISOString(),
-        },
-      ],
-      totalCalories: 557,
-      totalProtein: 61,
-      totalCarbs: 56,
-      totalFat: 7,
-      totalFiber: 1,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    },
-    {
-      id: 'meal_seed_snack',
-      userId: 'user_1',
-      date: today,
-      mealType: 'snacks',
-      items: [
-        {
-          id: 'item_s1',
-          foodId: 'food_5',
-          foodName: 'Banana (1 medium)',
-          quantity: 1,
-          unit: 'piece',
-          servingBasis: 'per piece (~120g)',
-          servingSize: 1,
-          calories: 105,
-          protein: 1,
-          carbohydrates: 27,
-          fat: 0,
-          fiber: 3,
-          addedAt: new Date().toISOString(),
-        },
-        {
-          id: 'item_s2',
-          foodId: 'food_6',
-          foodName: 'Almonds (Raw)',
-          quantity: 25,
-          unit: 'g',
-          servingBasis: 'per 100g',
-          servingSize: 100,
-          calories: 145,
-          protein: 5,
-          carbohydrates: 5,
-          fat: 12,
-          fiber: 3,
-          addedAt: new Date().toISOString(),
-        },
-      ],
-      totalCalories: 250,
-      totalProtein: 6,
-      totalCarbs: 32,
-      totalFat: 12,
-      totalFiber: 6,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    },
-  ];
-}
-
-function generateSeedBodyWeights(): BodyWeightEntry[] {
-  const dates = getPastDates(14);
-  const baseWeight = 78.5;
-  return dates.map((date: string, idx: number) => ({
-    id: `bw_${idx}`,
-    userId: 'user_1',
-    date,
-    weight: +(baseWeight - (13 - idx) * 0.08 + (Math.sin(idx) * 0.2)).toFixed(1),
-    unit: 'kg' as const,
-    notes: idx === 13 ? 'Morning weigh-in after fasting' : undefined,
-    createdAt: `${date}T07:00:00.000Z`,
-  }));
+  const userId = storageUserId;
+  if (userId && supabase) {
+    void supabase
+      .from('vyqor_user_data')
+      .upsert(
+        { user_id: userId, data_key: key, payload: value, updated_at: new Date().toISOString() },
+        { onConflict: 'user_id,data_key' }
+      )
+      .then(({ error }) => {
+        if (error) console.error('Failed to sync VYQOR data:', error.message);
+      });
+  }
 }
 
 // ── Mock Database Initialization ──────────────────────────────────────────
 
 export function initMockStorage() {
-  if (!localStorage.getItem(STORAGE_KEYS.USER)) {
+  if (!localStorage.getItem(scopedStorageKey(STORAGE_KEYS.USER))) {
     setStorage(STORAGE_KEYS.USER, DEFAULT_USER);
   }
-  if (!localStorage.getItem(STORAGE_KEYS.EXERCISES)) {
+  if (!localStorage.getItem(scopedStorageKey(STORAGE_KEYS.EXERCISES))) {
     setStorage(STORAGE_KEYS.EXERCISES, seedExercises);
   }
-  if (!localStorage.getItem(STORAGE_KEYS.SPLITS)) {
+  if (!localStorage.getItem(scopedStorageKey(STORAGE_KEYS.SPLITS))) {
     setStorage(STORAGE_KEYS.SPLITS, seedSplits);
   } else {
     // Merge any missing seed template splits
@@ -371,18 +116,53 @@ export function initMockStorage() {
       setStorage(STORAGE_KEYS.SPLITS, [...existing, ...missing]);
     }
   }
-  if (!localStorage.getItem(STORAGE_KEYS.SESSIONS)) {
-    setStorage(STORAGE_KEYS.SESSIONS, generateSeedSessions());
+  if (!localStorage.getItem(scopedStorageKey(STORAGE_KEYS.SESSIONS))) {
+    setStorage(STORAGE_KEYS.SESSIONS, []);
   }
-  if (!localStorage.getItem(STORAGE_KEYS.MEALS)) {
-    setStorage(STORAGE_KEYS.MEALS, generateSeedMeals());
+  if (!localStorage.getItem(scopedStorageKey(STORAGE_KEYS.MEALS))) {
+    setStorage(STORAGE_KEYS.MEALS, []);
   }
-  if (!localStorage.getItem(STORAGE_KEYS.NUTRITION_GOALS)) {
+  if (!localStorage.getItem(scopedStorageKey(STORAGE_KEYS.NUTRITION_GOALS))) {
     setStorage(STORAGE_KEYS.NUTRITION_GOALS, DEFAULT_GOAL);
   }
-  if (!localStorage.getItem(STORAGE_KEYS.BODY_WEIGHTS)) {
-    setStorage(STORAGE_KEYS.BODY_WEIGHTS, generateSeedBodyWeights());
+  if (!localStorage.getItem(scopedStorageKey(STORAGE_KEYS.BODY_WEIGHTS))) {
+    setStorage(STORAGE_KEYS.BODY_WEIGHTS, []);
   }
+
+  // Remove demo records generated by older app versions from existing accounts.
+  const meals = getStorage<MealLog[]>(STORAGE_KEYS.MEALS, []);
+  const realMeals = meals.filter((meal) => !meal.id.startsWith('meal_seed_'));
+  if (realMeals.length !== meals.length) setStorage(STORAGE_KEYS.MEALS, realMeals);
+
+  const sessions = getStorage<WorkoutSession[]>(STORAGE_KEYS.SESSIONS, []);
+  const realSessions = sessions.filter((session) => !session.id.startsWith('sess_prev_'));
+  if (realSessions.length !== sessions.length) setStorage(STORAGE_KEYS.SESSIONS, realSessions);
+
+  const bodyWeights = getStorage<BodyWeightEntry[]>(STORAGE_KEYS.BODY_WEIGHTS, []);
+  const realBodyWeights = bodyWeights.filter((entry) => !/^bw_\d+$/.test(entry.id));
+  if (realBodyWeights.length !== bodyWeights.length) setStorage(STORAGE_KEYS.BODY_WEIGHTS, realBodyWeights);
+}
+
+export async function setMockStorageUser(userId: string | null) {
+  storageUserId = userId;
+  if (!userId) return;
+
+  if (supabase) {
+    const { data, error } = await supabase
+      .from('vyqor_user_data')
+      .select('data_key, payload')
+      .eq('user_id', userId);
+
+    if (error) {
+      console.error('Failed to load VYQOR cloud data:', error.message);
+    } else if (storageUserId === userId) {
+      data.forEach((row) => {
+        localStorage.setItem(scopedStorageKey(row.data_key), JSON.stringify(row.payload));
+      });
+    }
+  }
+
+  if (storageUserId === userId) initMockStorage();
 }
 
 // Automatically ensure seeded data exists
@@ -556,6 +336,10 @@ export const mockApi = {
     return all.filter((m) => m.date === date);
   },
 
+  async getAllMeals(): Promise<MealLog[]> {
+    return getStorage<MealLog[]>(STORAGE_KEYS.MEALS, []);
+  },
+
   async saveMeal(meal: MealLog): Promise<MealLog> {
     const all = getStorage<MealLog[]>(STORAGE_KEYS.MEALS, []);
     const idx = all.findIndex((m) => m.id === meal.id || (m.date === meal.date && m.mealType === meal.mealType));
@@ -617,3 +401,6 @@ export const mockApi = {
     );
   },
 };
+
+
+
