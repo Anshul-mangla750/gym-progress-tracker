@@ -55,13 +55,13 @@ export function BodyWeightChart({ entries, unit }: BodyWeightChartProps) {
                 <stop offset="95%" stopColor="#F97316" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#262626" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#E8EEE9" vertical={false} />
             <XAxis
               dataKey="date"
               stroke="#6B7280"
               fontSize={11}
               tickLine={false}
-              axisLine={{ stroke: '#2A2A2A' }}
+              axisLine={{ stroke: '#DDE5DF' }}
             />
             <YAxis
               domain={[minWeight, maxWeight]}

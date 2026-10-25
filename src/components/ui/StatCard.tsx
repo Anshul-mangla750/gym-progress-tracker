@@ -32,7 +32,7 @@ export function StatCard({
   return (
     <div
       onClick={onClick}
-      className={`dashboard-stat-card flex flex-col justify-between bg-white border border-[#E4EDE7] rounded-2xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-all min-h-[128px] ${
+      className={`dashboard-stat-card flex flex-col justify-between bg-white border border-[#E9E4F0] rounded-2xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-all min-h-[128px] ${
         onClick ? 'cursor-pointer' : ''
       } ${className}`}
     >
@@ -68,13 +68,13 @@ export function StatCard({
       </div>
 
       {(trend || subtitle) && (
-        <div className="mt-3 pt-2.5 border-t border-[#F0F4F1] flex items-center justify-between text-[11px] sm:text-xs min-w-0">
+        <div className="mt-3 pt-2.5 border-t border-[#F1EEF5] flex items-center justify-between text-[11px] sm:text-xs min-w-0">
           {trend ? (
             <span
               className={`inline-flex items-center gap-1.5 font-bold tabular-nums min-w-0 truncate ${
                 trend.value > 0
                   ? trend.isPositiveGood !== false
-                    ? 'text-[#079447]'
+                    ? 'text-[#7C3AED]'
                     : 'text-[#E95767]'
                   : 'text-[#667085]'
               }`}

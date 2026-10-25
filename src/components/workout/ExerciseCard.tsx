@@ -87,7 +87,7 @@ export function ExerciseCard({
                 e.stopPropagation();
                 if (onSelect) onSelect(exercise);
               }}
-              className="px-2.5 py-1 rounded-lg bg-accent-primary text-black font-semibold text-xs flex items-center gap-1 hover:bg-accent-primary-hover transition-colors shadow-xs"
+              className="px-2.5 py-1 rounded-lg bg-accent-primary text-white font-semibold text-xs flex items-center gap-1 hover:bg-accent-primary-hover transition-colors shadow-xs"
             >
               <Plus size={13} className="stroke-[3]" />
               <span>Add</span>

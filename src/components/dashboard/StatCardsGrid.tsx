@@ -17,23 +17,23 @@ export function StatCardsGrid({
   displayPRs,
 }: StatCardsGridProps) {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
+    <div className="dashboard-stats-grid grid grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
       {/* Card 1 — Weekly Volume */}
       <StatCard
         title="Weekly Volume"
         value={displayVolume}
         unit="kg"
         icon={
-          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#E8F7EC] flex items-center justify-center text-[#079447]">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#F3E8FF] flex items-center justify-center text-[#7C3AED]">
             <Dumbbell size={20} />
           </div>
         }
         trend={{ value: 8.5, label: 'vs last week', isPositiveGood: true }}
         rightVisual={
           <div className="flex items-end gap-1 h-5 pt-1">
-            <span className="w-1.5 h-2.5 bg-[#079447] rounded-xs"></span>
-            <span className="w-1.5 h-4 bg-[#079447] rounded-xs"></span>
-            <span className="w-1.5 h-5 bg-[#079447] rounded-xs"></span>
+            <span className="w-1.5 h-2.5 bg-[#7C3AED] rounded-xs"></span>
+            <span className="w-1.5 h-4 bg-[#7C3AED] rounded-xs"></span>
+            <span className="w-1.5 h-5 bg-[#7C3AED] rounded-xs"></span>
           </div>
         }
       />

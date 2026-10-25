@@ -77,7 +77,7 @@ export function ExerciseLibrary() {
       />
 
       {/* Search & Filters */}
-      <div className="space-y-3.5 bg-white p-4 sm:p-5 rounded-2xl border border-[#E2E8E4] shadow-xs">
+      <div className="space-y-3.5 bg-white p-4 sm:p-5 rounded-2xl border border-[#E9E4F0] shadow-xs">
         <div className="relative">
           <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400" />
           <input
@@ -85,7 +85,7 @@ export function ExerciseLibrary() {
             placeholder="Search exercises by name, primary or secondary muscle..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full h-11 pl-10 pr-4 rounded-xl bg-[#F8FAF9] border border-[#E4EDE7] text-[#101828] placeholder:text-[#667085] text-sm focus:outline-none focus:border-[#079447] focus:ring-2 focus:ring-[#079447]/20 transition-all"
+            className="w-full h-11 pl-10 pr-4 rounded-xl bg-[#FBFAFD] border border-[#E9E4F0] text-[#101828] placeholder:text-[#667085] text-sm focus:outline-none focus:border-[#7C3AED] focus:ring-2 focus:ring-[#7C3AED]/20 transition-all"
           />
         </div>
 
@@ -96,7 +96,7 @@ export function ExerciseLibrary() {
             onClick={() => setSelectedMuscle('all')}
             className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap cursor-pointer transition-all ${
               selectedMuscle === 'all'
-                ? 'bg-[#079447] text-white shadow-xs'
+                ? 'bg-[#7C3AED] text-white shadow-xs'
                 : 'bg-neutral-100 text-[#667085] hover:text-[#101828] hover:bg-neutral-200/80'
             }`}
           >
@@ -109,7 +109,7 @@ export function ExerciseLibrary() {
               onClick={() => setSelectedMuscle(m.value as MuscleGroup)}
               className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap cursor-pointer capitalize transition-all ${
                 selectedMuscle === m.value
-                  ? 'bg-[#079447] text-white shadow-xs'
+                  ? 'bg-[#7C3AED] text-white shadow-xs'
                   : 'bg-neutral-100 text-[#667085] hover:text-[#101828] hover:bg-neutral-200/80'
               }`}
             >
@@ -149,7 +149,7 @@ export function ExerciseLibrary() {
           No exercises found matching your search and filter criteria.
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="exercise-results-grid grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
           {filteredExercises.map((ex) => (
             <ExerciseCard
               key={ex.id}
@@ -183,7 +183,7 @@ export function ExerciseLibrary() {
             required
           />
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <Select
               label="Primary Target Muscle"
               value={muscle}

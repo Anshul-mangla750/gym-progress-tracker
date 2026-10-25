@@ -102,7 +102,7 @@ export function ActiveWorkout() {
           </Button>
           <Button
             variant="primary"
-            icon={<Play size={15} className="fill-black" />}
+            icon={<Play size={15} className="fill-white" />}
             onClick={() => startEmptyWorkout('Freestyle Session')}
           >
             Start Empty Workout

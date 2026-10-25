@@ -46,13 +46,13 @@ export function VolumeChart({ sessions, unit }: VolumeChartProps) {
       <div className="h-64 w-full pt-4">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#262626" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#E8EEE9" vertical={false} />
             <XAxis
               dataKey="date"
               stroke="#6B7280"
               fontSize={11}
               tickLine={false}
-              axisLine={{ stroke: '#2A2A2A' }}
+              axisLine={{ stroke: '#DDE5DF' }}
             />
             <YAxis
               stroke="#6B7280"

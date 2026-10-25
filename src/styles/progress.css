@@ -5,7 +5,7 @@
 /* Chart container cards */
 .analytics-chart-card {
   background-color: #FFFFFF;
-  border: 1px solid #E4EDE7;
+  border: 1px solid #E9E4F0;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 0 1px 3px rgba(16, 24, 40, 0.05);
@@ -13,8 +13,8 @@
 }
 
 .analytics-chart-card:hover {
-  border-color: #C5EBCE;
-  box-shadow: 0 6px 20px -2px rgba(7, 148, 71, 0.06);
+  border-color: #DDD6FE;
+  box-shadow: 0 6px 20px -2px rgba(124, 58, 237, 0.12);
 }
 
 /* PR Table styling */
@@ -25,17 +25,17 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #667085;
-  border-bottom: 1px solid #E4EDE7;
+  border-bottom: 1px solid #E9E4F0;
 }
 
 .pr-table-row td {
   padding: 0.875rem 0.5rem;
-  border-bottom: 1px solid #F0F4F1;
+  border-bottom: 1px solid #F1EEF5;
   font-size: 0.8125rem;
 }
 
 .pr-table-row:hover td {
-  background-color: #F8FAF9;
+  background-color: #FBFAFD;
 }
 
 /* Metric chip */
@@ -45,9 +45,9 @@
   gap: 0.25rem;
   padding: 0.25rem 0.625rem;
   border-radius: 9999px;
-  background-color: #E8F7EC;
-  color: #075B38;
+  background-color: #F3E8FF;
+  color: #5B21B6;
   font-weight: 700;
   font-size: 0.6875rem;
-  border: 1px solid #C5EBCE;
+  border: 1px solid #DDD6FE;
 }

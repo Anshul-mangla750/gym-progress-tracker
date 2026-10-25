@@ -7,9 +7,9 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const variantClasses = {
-  default: 'bg-white border border-[#E2E8E4] shadow-xs',
-  elevated: 'bg-white border border-[#E2E8E4] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]',
-  interactive: 'bg-white border border-[#E2E8E4] hover:border-emerald-500/60 hover:shadow-[0_8px_30px_-6px_rgba(22,163,74,0.12)] hover:-translate-y-0.5 cursor-pointer transition-all duration-200',
+  default: 'bg-white border border-[#E9E4F0] shadow-xs',
+  elevated: 'bg-white border border-[#E9E4F0] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]',
+  interactive: 'bg-white border border-[#E9E4F0] hover:border-violet-500/60 hover:shadow-[0_8px_30px_-6px_rgba(22,163,74,0.12)] hover:-translate-y-0.5 cursor-pointer transition-all duration-200',
 };
 
 const paddingClasses = {

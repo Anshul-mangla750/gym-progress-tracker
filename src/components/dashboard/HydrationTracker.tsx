@@ -16,7 +16,7 @@ export function HydrationTracker({
   const percentage = Math.min(100, Math.round((waterMl / waterGoalMl) * 100));
 
   return (
-    <div className="pt-5 border-t border-[#F0F4F1] space-y-3">
+    <div className="pt-5 border-t border-[#F1EEF5] space-y-3">
       <div className="flex items-center justify-between text-xs">
         <div className="flex items-center gap-1.5 font-bold text-[#101828]">
           <Droplets size={14} className="text-[#2585E8] fill-[#2585E8]" />

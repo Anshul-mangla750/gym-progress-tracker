@@ -21,7 +21,7 @@ export function HelpModal({ isOpen, onClose }: HelpModalProps) {
       onClose={onClose}
       title={
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-[#E8F7EC] text-[#079447] flex items-center justify-center">
+          <div className="w-8 h-8 rounded-xl bg-[#F3E8FF] text-[#7C3AED] flex items-center justify-center">
             <HelpCircle size={18} />
           </div>
           <span className="font-heading font-black text-lg text-neutral-900">Help & Support</span>
@@ -32,9 +32,9 @@ export function HelpModal({ isOpen, onClose }: HelpModalProps) {
     >
       <div className="p-4 sm:p-6 space-y-4 text-xs sm:text-sm text-neutral-700">
         <div className="space-y-3">
-          <div className="p-3.5 rounded-xl bg-[#F8FAF9] border border-[#E4EDE7] space-y-1">
+          <div className="p-3.5 rounded-xl bg-[#FBFAFD] border border-[#E9E4F0] space-y-1">
             <div className="flex items-center gap-2 font-bold text-neutral-900">
-              <Dumbbell size={15} className="text-[#079447]" />
+              <Dumbbell size={15} className="text-[#7C3AED]" />
               <span>How does Progressive Overload work?</span>
             </div>
             <p className="text-neutral-600 text-xs leading-relaxed">
@@ -42,7 +42,7 @@ export function HelpModal({ isOpen, onClose }: HelpModalProps) {
             </p>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-[#F8FAF9] border border-[#E4EDE7] space-y-1">
+          <div className="p-3.5 rounded-xl bg-[#FBFAFD] border border-[#E9E4F0] space-y-1">
             <div className="flex items-center gap-2 font-bold text-neutral-900">
               <UtensilsCrossed size={15} className="text-[#FF7A00]" />
               <span>How do I track meals and macros?</span>
@@ -52,7 +52,7 @@ export function HelpModal({ isOpen, onClose }: HelpModalProps) {
             </p>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-[#F8FAF9] border border-[#E4EDE7] space-y-1">
+          <div className="p-3.5 rounded-xl bg-[#FBFAFD] border border-[#E9E4F0] space-y-1">
             <div className="flex items-center gap-2 font-bold text-neutral-900">
               <Sparkles size={15} className="text-[#7540E8]" />
               <span>What is Jimm AI?</span>
@@ -62,12 +62,12 @@ export function HelpModal({ isOpen, onClose }: HelpModalProps) {
             </p>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-[#E8F7EC] border border-emerald-200 space-y-1">
-            <div className="flex items-center gap-2 font-bold text-[#075B38]">
-              <Zap size={15} className="text-[#079447]" />
+          <div className="p-3.5 rounded-xl bg-[#F3E8FF] border border-violet-200 space-y-1">
+            <div className="flex items-center gap-2 font-bold text-[#5B21B6]">
+              <Zap size={15} className="text-[#7C3AED]" />
               <span>Need 1-on-1 Athlete Support?</span>
             </div>
-            <p className="text-[#075B38] text-xs leading-relaxed">
+            <p className="text-[#5B21B6] text-xs leading-relaxed">
               As an athlete on EliteEngine Pro, you have direct priority access to human certified trainers and sports nutritionists.
             </p>
           </div>
@@ -77,7 +77,7 @@ export function HelpModal({ isOpen, onClose }: HelpModalProps) {
           <button
             type="button"
             onClick={handleContact}
-            className="flex-1 py-2.5 px-4 rounded-xl bg-[#079447] hover:bg-[#075B38] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer"
+            className="flex-1 py-2.5 px-4 rounded-xl bg-[#7C3AED] hover:bg-[#5B21B6] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer"
           >
             <Mail size={15} />
             <span>Contact Concierge</span>
@@ -85,7 +85,7 @@ export function HelpModal({ isOpen, onClose }: HelpModalProps) {
           <button
             type="button"
             onClick={onClose}
-            className="py-2.5 px-4 rounded-xl border border-[#E4EDE7] hover:bg-neutral-50 text-neutral-700 font-semibold text-xs sm:text-sm transition-colors cursor-pointer"
+            className="py-2.5 px-4 rounded-xl border border-[#E9E4F0] hover:bg-neutral-50 text-neutral-700 font-semibold text-xs sm:text-sm transition-colors cursor-pointer"
           >
             Close
           </button>

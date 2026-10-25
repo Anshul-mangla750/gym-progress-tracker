@@ -5,14 +5,14 @@
 /* Active workout banner & cards */
 .workout-session-card {
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 1px solid #E4EDE7;
+  border: 1px solid #E9E4F0;
   background-color: #FFFFFF;
 }
 
 .workout-session-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px -4px rgba(7, 148, 71, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
-  border-color: #C5EBCE;
+  box-shadow: 0 8px 24px -4px rgba(124, 58, 237, 0.2), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  border-color: #DDD6FE;
 }
 
 /* Day selector pill badge */
@@ -25,21 +25,21 @@
 }
 
 .workout-day-pill.active {
-  background: linear-gradient(135deg, #079447 0%, #075B38 100%);
+  background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%);
   color: #FFFFFF;
-  box-shadow: 0 2px 8px rgba(7, 148, 71, 0.25);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.2);
 }
 
 .workout-day-pill:not(.active) {
-  background: #F8FAF9;
+  background: #FBFAFD;
   color: #667085;
-  border: 1px solid #E4EDE7;
+  border: 1px solid #E9E4F0;
 }
 
 .workout-day-pill:not(.active):hover {
-  background: #E8F7EC;
-  color: #075B38;
-  border-color: #C5EBCE;
+  background: #F3E8FF;
+  color: #5B21B6;
+  border-color: #DDD6FE;
 }
 
 /* Exercise set item row in active workout */
@@ -52,7 +52,7 @@
 }
 
 .workout-set-row:hover {
-  background-color: #F8FAF9;
+  background-color: #FBFAFD;
 }
 
 /* Muscle target chip */
@@ -63,9 +63,9 @@
   font-size: 0.6875rem;
   font-weight: 600;
   border-radius: 0.375rem;
-  background-color: #F5FAF7;
-  color: #075B38;
-  border: 1px solid #E4EDE7;
+  background-color: #F8F7FB;
+  color: #5B21B6;
+  border: 1px solid #E9E4F0;
 }
 
 /* Rest timer circle animation */

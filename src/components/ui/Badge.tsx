@@ -12,9 +12,9 @@ interface BadgeProps {
 }
 
 const variantClasses: Record<BadgeVariant, string> = {
-  primary: 'bg-emerald-50 text-emerald-800 border-emerald-200/90 font-semibold',
+  primary: 'bg-violet-50 text-violet-800 border-violet-200/90 font-semibold',
   secondary: 'bg-blue-50 text-blue-700 border-blue-200/90 font-semibold',
-  success: 'bg-[#E8F8EE] text-[#15803D] border-[#B9E9CA] font-bold',
+  success: 'bg-[#F3E8FF] text-[#5B21B6] border-[#B9E9CA] font-bold',
   warning: 'bg-amber-50 text-amber-800 border-amber-200/80 font-semibold',
   error: 'bg-rose-50 text-rose-700 border-rose-200/80 font-semibold',
   info: 'bg-sky-50 text-sky-700 border-sky-200/80 font-semibold',

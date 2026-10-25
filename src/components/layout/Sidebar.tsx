@@ -66,25 +66,25 @@ export function Sidebar({
   return (
     <aside
       className={`
-        elite-sidebar w-[285px] lg:w-[295px] xl:w-[305px] min-w-[285px] lg:min-w-[295px] xl:min-w-[305px] bg-white border-r border-[#E4EDE7]
+        elite-sidebar w-[285px] lg:w-[295px] xl:w-[305px] min-w-[285px] lg:min-w-[295px] xl:min-w-[305px] bg-white border-r border-[#E9E4F0]
         flex flex-col h-full sticky top-0 shrink-0 select-none z-20 overflow-hidden
         ${className}
       `}
     >
       {/* ── Brand Header ────────────────────────────────────────── */}
-      <div className="h-[72px] px-6 flex items-center justify-between shrink-0 border-b border-[#E4EDE7]">
+      <div className="h-[72px] px-6 flex items-center justify-between shrink-0 border-b border-[#E9E4F0]">
         <NavLink
           to="/"
           onClick={handleNavClick}
           className="flex items-center gap-3.5 group focus:outline-none"
         >
           {/* Green rounded-square lightning logo */}
-          <div className="w-10 h-10 rounded-xl bg-[#079447] flex items-center justify-center text-white font-extrabold shadow-xs group-hover:scale-105 transition-transform shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-[#7C3AED] flex items-center justify-center text-white font-extrabold shadow-xs group-hover:scale-105 transition-transform shrink-0">
             <Zap className="w-5 h-5 fill-white stroke-white shrink-0" />
           </div>
           <div className="flex flex-col min-w-0">
             <span className="font-heading font-black text-lg tracking-tight text-[#101828] leading-none">
-              ELITE<span className="text-[#079447]">ENGINE</span>
+              ELITE<span className="text-[#7C3AED]">ENGINE</span>
             </span>
             <span className="text-[9px] text-[#667085] uppercase tracking-widest font-extrabold mt-1">
               AI FITNESS COMPANION
@@ -97,7 +97,7 @@ export function Sidebar({
           <button
             type="button"
             onClick={onClose}
-            className="w-8 h-8 rounded-xl border border-[#E4EDE7] flex items-center justify-center text-[#667085] hover:text-[#101828] hover:bg-neutral-50 transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-xl border border-[#E9E4F0] flex items-center justify-center text-[#667085] hover:text-[#101828] hover:bg-neutral-50 transition-colors cursor-pointer"
             aria-label="Close navigation menu"
           >
             <X size={16} />
@@ -114,11 +114,11 @@ export function Sidebar({
               navigate('/active-workout');
               handleNavClick();
             }}
-            className="p-3.5 mb-3 rounded-2xl bg-gradient-to-r from-[#075B38] to-[#0A452B] text-white shadow-xs border border-emerald-400/40 cursor-pointer hover:border-emerald-300 transition-all space-y-2 group"
+            className="p-3.5 mb-3 rounded-2xl bg-gradient-to-r from-[#5B21B6] to-[#4C1D95] text-white shadow-xs border border-violet-400/40 cursor-pointer hover:border-violet-300 transition-all space-y-2 group"
           >
             <div className="flex items-center justify-between">
-              <span className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-wider text-emerald-300">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-wider text-violet-300">
+                <span className="w-2 h-2 rounded-full bg-violet-400 animate-ping"></span>
                 <span>Active Workout</span>
               </span>
               <span className="font-mono text-xs font-bold text-white tabular-nums bg-white/10 px-2 py-0.5 rounded-md">
@@ -129,8 +129,8 @@ export function Sidebar({
               <span className="font-heading font-bold text-xs truncate text-white">
                 {session.dayName || 'Active Session'}
               </span>
-              <span className="text-emerald-300 text-xs font-bold flex items-center group-hover:translate-x-0.5 transition-transform">
-                <Play size={10} className="fill-emerald-300 mr-1" /> Resume →
+              <span className="text-violet-300 text-xs font-bold flex items-center group-hover:translate-x-0.5 transition-transform">
+                <Play size={10} className="fill-violet-300 mr-1" /> Resume →
               </span>
             </div>
           </div>
@@ -150,8 +150,8 @@ export function Sidebar({
                   flex items-center justify-between px-4 py-2.5 rounded-xl text-xs sm:text-[13px] font-semibold transition-all duration-150 group cursor-pointer
                   ${
                     isActive
-                      ? 'bg-[#E8F7EC] text-[#079447] font-bold shadow-2xs'
-                      : 'text-[#667085] hover:text-[#101828] hover:bg-[#F8FAF9]'
+                      ? 'bg-[#F3E8FF] text-[#7C3AED] font-bold shadow-2xs'
+                      : 'text-[#667085] hover:text-[#101828] hover:bg-[#FBFAFD]'
                   }
                 `}
               >
@@ -162,7 +162,7 @@ export function Sidebar({
                         size={18}
                         className={`min-w-[18px] min-h-[18px] shrink-0 transition-colors ${
                           isActive
-                            ? 'text-[#079447]'
+                            ? 'text-[#7C3AED]'
                             : 'text-[#667085] group-hover:text-[#101828]'
                         }`}
                       />
@@ -173,7 +173,7 @@ export function Sidebar({
                     {item.badge && (
                       <span
                         className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md border shrink-0 ${
-                          item.badgeColor || 'bg-neutral-100 text-[#667085] border-[#E4EDE7]'
+                          item.badgeColor || 'bg-neutral-100 text-[#667085] border-[#E9E4F0]'
                         }`}
                       >
                         {item.badge}
@@ -187,26 +187,26 @@ export function Sidebar({
         </div>
 
         {/* ── Visual Section Divider ────────────────────────────── */}
-        <div className="my-3.5 border-t border-[#E4EDE7]/80" />
+        <div className="my-3.5 border-t border-[#E9E4F0]/80" />
 
         {/* ── Ask Jimm AI Coach Card ────────────────────────────── */}
         <div>
-          <div className="p-4 rounded-2xl bg-[#E8F7EC] border border-[#C5EBCE] shadow-2xs space-y-3">
+          <div className="p-4 rounded-2xl bg-[#F3E8FF] border border-[#DDD6FE] shadow-2xs space-y-3">
             <div className="flex items-center gap-3.5">
-              <div className="relative w-10 h-10 rounded-xl bg-white flex items-center justify-center overflow-hidden border border-emerald-200 shadow-2xs shrink-0">
+              <div className="relative w-10 h-10 rounded-xl bg-white flex items-center justify-center overflow-hidden border border-violet-200 shadow-2xs shrink-0">
                 <img
                   src={jimmRobotImg}
                   alt="Jimm AI Coach"
                   className="w-full h-full object-cover"
                 />
-                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#079447] border-2 border-white"></span>
+                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#7C3AED] border-2 border-white"></span>
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-1.5">
                   <span className="font-heading font-black text-xs text-[#101828] truncate">
                     Ask Jimm AI
                   </span>
-                  <Sparkles size={11} className="text-[#079447] fill-[#079447] shrink-0" />
+                  <Sparkles size={11} className="text-[#7C3AED] fill-[#7C3AED] shrink-0" />
                 </div>
                 <span className="text-[10px] text-[#667085] leading-tight block mt-0.5 truncate">
                   Get personalized workout plans, diet tips and more.
@@ -220,7 +220,7 @@ export function Sidebar({
                 if (onOpenJimm) onOpenJimm();
                 handleNavClick();
               }}
-              className="w-full flex items-center justify-center gap-1.5 py-2.5 px-3.5 rounded-xl bg-[#079447] hover:bg-[#075B38] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+              className="w-full flex items-center justify-center gap-1.5 py-2.5 px-3.5 rounded-xl bg-[#7C3AED] hover:bg-[#5B21B6] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
             >
               <span>Chat with Jimm AI →</span>
             </button>
@@ -228,7 +228,7 @@ export function Sidebar({
         </div>
 
         {/* ── Visual Section Divider ────────────────────────────── */}
-        <div className="my-3 border-t border-[#E4EDE7]/80" />
+        <div className="my-3 border-t border-[#E9E4F0]/80" />
 
         {/* ── Settings & Help Links ──────────────────────────────── */}
         <div className="space-y-1.5">
@@ -238,7 +238,7 @@ export function Sidebar({
               if (onOpenGoalPace) onOpenGoalPace();
               handleNavClick();
             }}
-            className="w-full flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-xs sm:text-[13px] font-semibold text-[#667085] hover:text-[#101828] hover:bg-[#F8FAF9] transition-colors cursor-pointer text-left"
+            className="w-full flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-xs sm:text-[13px] font-semibold text-[#667085] hover:text-[#101828] hover:bg-[#FBFAFD] transition-colors cursor-pointer text-left"
           >
             <Settings size={18} className="text-[#667085] shrink-0" />
             <span>Settings</span>
@@ -250,7 +250,7 @@ export function Sidebar({
               if (onOpenHelp) onOpenHelp();
               handleNavClick();
             }}
-            className="w-full flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-xs sm:text-[13px] font-semibold text-[#667085] hover:text-[#101828] hover:bg-[#F8FAF9] transition-colors cursor-pointer text-left"
+            className="w-full flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-xs sm:text-[13px] font-semibold text-[#667085] hover:text-[#101828] hover:bg-[#FBFAFD] transition-colors cursor-pointer text-left"
           >
             <HelpCircle size={18} className="text-[#667085] shrink-0" />
             <span>Help & Support</span>
@@ -259,27 +259,27 @@ export function Sidebar({
       </nav>
 
       {/* ── User Profile & Pro Athlete Dock ────────────────────── */}
-      <div className="p-3.5 border-t border-[#E4EDE7] shrink-0 bg-white">
+      <div className="p-3.5 border-t border-[#E9E4F0] shrink-0 bg-white">
         <div
           onClick={() => {
             if (onOpenGoalPace) onOpenGoalPace();
             handleNavClick();
           }}
-          className="flex items-center gap-3.5 p-2 rounded-xl hover:bg-[#F8FAF9] transition-colors cursor-pointer"
+          className="flex items-center gap-3.5 p-2 rounded-xl hover:bg-[#FBFAFD] transition-colors cursor-pointer"
         >
-          <div className="relative w-9 h-9 rounded-full border border-[#E4EDE7] overflow-hidden shrink-0 shadow-2xs">
+          <div className="relative w-9 h-9 rounded-full border border-[#E9E4F0] overflow-hidden shrink-0 shadow-2xs">
             <img
               src={alexAvatarImg}
               alt="Alex Vance"
               className="w-full h-full object-cover"
             />
-            <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#079447] border-2 border-white"></span>
+            <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#7C3AED] border-2 border-white"></span>
           </div>
           <div className="min-w-0 flex-1">
             <span className="font-heading font-bold text-xs text-[#101828] block truncate leading-tight">
               {user?.displayName || 'Alex Vance'}
             </span>
-            <span className="text-[10px] text-[#079447] font-bold block leading-tight flex items-center gap-1 mt-0.5">
+            <span className="text-[10px] text-[#7C3AED] font-bold block leading-tight flex items-center gap-1 mt-0.5">
               <span>Pro Athlete</span>
               <span className="text-[#667085]">•</span>
               <span className="text-[#667085] font-medium">Hypertrophy</span>

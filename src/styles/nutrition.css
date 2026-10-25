@@ -8,7 +8,7 @@
   align-items: center;
   gap: 0.5rem;
   background-color: #FFFFFF;
-  border: 1px solid #E4EDE7;
+  border: 1px solid #E9E4F0;
   border-radius: 9999px;
   padding: 0.25rem 0.75rem;
   box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
@@ -26,21 +26,21 @@
 }
 
 .nutrition-date-nav button:hover {
-  background-color: #E8F7EC;
-  color: #079447;
+  background-color: #F3E8FF;
+  color: #7C3AED;
 }
 
 /* Meal Section Card */
 .nutrition-meal-card {
-  border: 1px solid #E4EDE7;
+  border: 1px solid #E9E4F0;
   border-radius: 1rem;
   background-color: #FFFFFF;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .nutrition-meal-card:hover {
-  border-color: #C5EBCE;
-  box-shadow: 0 4px 16px -2px rgba(7, 148, 71, 0.06);
+  border-color: #DDD6FE;
+  box-shadow: 0 4px 16px -2px rgba(124, 58, 237, 0.08);
 }
 
 /* Food Item Row */
@@ -54,20 +54,20 @@
 }
 
 .nutrition-food-row:hover {
-  background-color: #F8FAF9;
+  background-color: #FBFAFD;
 }
 
 /* Macro progress bars */
 .macro-progress-track {
   height: 0.5rem;
   border-radius: 9999px;
-  background-color: #F0F4F1;
+  background-color: #F1EEF5;
   overflow: hidden;
 }
 
 .macro-progress-fill-protein {
   height: 100%;
-  background: linear-gradient(90deg, #079447 0%, #10B981 100%);
+  background: linear-gradient(90deg, #7C3AED 0%, #8B5CF6 100%);
   border-radius: 9999px;
   transition: width 0.4s ease;
 }

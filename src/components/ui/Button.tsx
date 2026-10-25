@@ -14,15 +14,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-[#079447] hover:bg-[#075B38] active:bg-[#05482C] text-white font-bold shadow-xs hover:shadow-md hover:shadow-emerald-700/20 active:scale-[0.98]',
+    'bg-[#7C3AED] hover:bg-[#5B21B6] active:bg-[#4C1D95] text-white font-bold shadow-xs hover:shadow-md hover:shadow-violet-700/20 active:scale-[0.98]',
   secondary:
-    'bg-white border border-[#E4EDE7] text-[#101828] hover:bg-[#F8FAF9] shadow-xs active:scale-[0.98]',
+    'bg-white border border-[#E9E4F0] text-[#101828] hover:bg-[#FBFAFD] shadow-xs active:scale-[0.98]',
   ghost:
-    'bg-transparent text-[#667085] hover:text-[#101828] hover:bg-[#F8FAF9] active:scale-[0.98]',
+    'bg-transparent text-[#667085] hover:text-[#101828] hover:bg-[#FBFAFD] active:scale-[0.98]',
   danger:
     'bg-[#FEE8EB] text-[#E95767] hover:bg-rose-100 border border-rose-200 active:scale-[0.98]',
   success:
-    'bg-[#E8F7EC] text-[#075B38] hover:bg-emerald-100 border border-emerald-200 active:scale-[0.98]',
+    'bg-[#F3E8FF] text-[#5B21B6] hover:bg-violet-100 border border-violet-200 active:scale-[0.98]',
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

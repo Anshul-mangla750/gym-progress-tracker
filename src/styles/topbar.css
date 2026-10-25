@@ -2,32 +2,32 @@
 
 .elite-topbar-container {
   background: #FFFFFF;
-  border-bottom: 1px solid #E4EDE7;
+  border-bottom: 1px solid #E9E4F0;
 }
 
 .topbar-search-input {
-  background: #F8FAF9;
-  border: 1px solid #E4EDE7;
+  background: #FBFAFD;
+  border: 1px solid #E9E4F0;
   color: #101828;
   transition: all 0.2s ease;
 }
 
 .topbar-search-input:focus {
   background: #FFFFFF;
-  border-color: #079447;
-  box-shadow: 0 0 0 3px rgba(7, 148, 71, 0.12);
+  border-color: #7C3AED;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
 }
 
 .topbar-upgrade-btn {
   background: #FFFFFF;
-  border: 1px solid #E4EDE7;
+  border: 1px solid #E9E4F0;
   color: #101828;
   transition: all 0.18s ease;
 }
 
 .topbar-upgrade-btn:hover {
-  background: #F8FAF9;
-  border-color: #D9E4DC;
+  background: #FBFAFD;
+  border-color: #DCD6E6;
   transform: translateY(-1px);
 }
 
@@ -39,15 +39,15 @@
 
 .topbar-icon-btn {
   background: #FFFFFF;
-  border: 1px solid #E4EDE7;
+  border: 1px solid #E9E4F0;
   color: #667085;
   transition: all 0.18s ease;
 }
 
 .topbar-icon-btn:hover {
-  background: #F8FAF9;
+  background: #FBFAFD;
   color: #101828;
-  border-color: #D9E4DC;
+  border-color: #DCD6E6;
 }
 
 .topbar-user-btn {
@@ -55,5 +55,5 @@
 }
 
 .topbar-user-btn:hover {
-  background: #F8FAF9;
+  background: #FBFAFD;
 }

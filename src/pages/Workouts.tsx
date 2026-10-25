@@ -117,15 +117,15 @@ export function Workouts() {
           </div>
 
           {/* Days Grid */}
-          <div className="workout-days-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="workout-days-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
             {activeSplit?.days.map((day, idx) => (
               <div
                 key={day.id}
-                className="workout-day-card bg-white rounded-3xl p-6 border border-[#E2E8E4] shadow-xs hover:shadow-md hover:border-emerald-300/80 hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between"
+                className="workout-day-card bg-white rounded-3xl p-6 border border-[#E9E4F0] shadow-xs hover:shadow-md hover:border-violet-300/80 hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between pb-3.5 border-b border-[#E8ECE9] mb-3.5">
-                    <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-[#E8F8EE] text-[#15803D] border border-[#BDE7CD]">
+                  <div className="flex items-center justify-between pb-3.5 border-b border-[#E9E4F0] mb-3.5">
+                    <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-[#F3E8FF] text-[#5B21B6] border border-[#BDE7CD]">
                       Day {idx + 1}
                     </span>
                     <span className="text-xs font-bold text-neutral-500">
@@ -141,10 +141,10 @@ export function Workouts() {
                     {day.exercises.slice(0, 5).map((ex, exIdx) => (
                       <div
                         key={ex.id || exIdx}
-                        className="flex items-center justify-between px-3 py-2 rounded-xl bg-[#F8FAF9] text-xs"
+                        className="flex items-center justify-between px-3 py-2 rounded-xl bg-[#FBFAFD] text-xs"
                       >
                         <span className="font-semibold text-neutral-800 line-clamp-1">{ex.exerciseName}</span>
-                        <span className="text-neutral-500 font-bold tabular-nums shrink-0 ml-2 bg-white px-2 py-0.5 rounded-md border border-[#E8ECE9]">
+                        <span className="text-neutral-500 font-bold tabular-nums shrink-0 ml-2 bg-white px-2 py-0.5 rounded-md border border-[#E9E4F0]">
                           {ex.targetSets} sets
                         </span>
                       </div>
@@ -157,11 +157,11 @@ export function Workouts() {
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-[#E8ECE9]">
+                <div className="pt-3 border-t border-[#E9E4F0]">
                   <button
                     type="button"
                     onClick={() => handleStartDay(day)}
-                    className="w-full py-3 px-4 rounded-xl bg-[#079447] hover:bg-[#075B38] text-white font-heading font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs hover:shadow-md transition-all cursor-pointer"
+                    className="w-full py-3 px-4 rounded-xl bg-[#7C3AED] hover:bg-[#5B21B6] text-white font-heading font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs hover:shadow-md transition-all cursor-pointer"
                   >
                     <Play size={14} className="fill-white" />
                     <span>Start Workout</span>
@@ -203,7 +203,7 @@ export function Workouts() {
                   )}
                 </div>
 
-                <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 sm:gap-6 shrink-0 text-xs pt-2 sm:pt-0 border-t sm:border-t-0 border-[#E8ECE9]">
+                <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 sm:gap-6 shrink-0 text-xs pt-2 sm:pt-0 border-t sm:border-t-0 border-[#E9E4F0]">
                   <div className="flex items-center gap-1.5 text-text-secondary">
                     <Clock size={14} className="text-text-muted" />
                     <span className="tabular-nums font-medium">

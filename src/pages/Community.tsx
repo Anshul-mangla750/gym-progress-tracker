@@ -149,8 +149,8 @@ export function Community() {
               onClick={() => setSelectedCat(cat.id)}
               className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap cursor-pointer transition-all flex items-center gap-1.5 ${
                 isActive
-                  ? 'bg-[#079447] text-white shadow-xs'
-                  : 'bg-white text-neutral-600 hover:text-neutral-900 border border-[#E4EDE7] hover:bg-neutral-50'
+                  ? 'bg-[#7C3AED] text-white shadow-xs'
+                  : 'bg-white text-neutral-600 hover:text-neutral-900 border border-[#E9E4F0] hover:bg-neutral-50'
               }`}
             >
               {Icon && <Icon size={13} />}
@@ -163,11 +163,11 @@ export function Community() {
       {/* Feed list */}
       <div className="space-y-4">
         {filteredPosts.map((post) => (
-          <Card key={post.id} padding="md" className="border-[#E5E9E6] bg-white hover:shadow-xs transition-all">
+          <Card key={post.id} padding="md" className="border-[#E9E4F0] bg-white hover:shadow-xs transition-all">
             {/* Header: Author + Category */}
             <div className="flex items-center justify-between pb-3.5 border-b border-neutral-100 mb-3.5">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 font-extrabold text-xs">
+                <div className="w-9 h-9 rounded-full bg-violet-50 border border-violet-200 flex items-center justify-center text-violet-700 font-extrabold text-xs">
                   {post.authorName.charAt(0)}
                 </div>
                 <div>
@@ -176,7 +176,7 @@ export function Community() {
                       {post.authorName}
                     </span>
                     {post.authorBadge && (
-                      <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                      <span className="text-[10px] font-semibold text-violet-700 bg-violet-50 px-2 py-0.5 rounded-full border border-violet-200">
                         {post.authorBadge}
                       </span>
                     )}
@@ -202,10 +202,10 @@ export function Community() {
 
             {/* PR Metric Callout if applicable */}
             {post.prMetric && (
-              <div className="p-3 rounded-xl bg-emerald-50/80 border border-emerald-200/80 flex items-center gap-2 mb-3.5 text-xs">
-                <Trophy size={16} className="text-emerald-600 shrink-0" />
+              <div className="p-3 rounded-xl bg-violet-50/80 border border-violet-200/80 flex items-center gap-2 mb-3.5 text-xs">
+                <Trophy size={16} className="text-violet-600 shrink-0" />
                 <span className="text-neutral-600 font-medium">Official Milestone:</span>
-                <strong className="text-emerald-700 font-mono font-extrabold">{post.prMetric}</strong>
+                <strong className="text-violet-700 font-mono font-extrabold">{post.prMetric}</strong>
               </div>
             )}
 

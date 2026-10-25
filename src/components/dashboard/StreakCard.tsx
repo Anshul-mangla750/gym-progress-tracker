@@ -33,7 +33,7 @@ export function StreakCard({ streakDays = 4, daysOfWeek, className = '' }: Strea
       </div>
 
       {/* 7-Day Weekday Indicators */}
-      <div className="flex items-center justify-between gap-1 pt-3 border-t border-[#F0F4F1]">
+      <div className="flex items-center justify-between gap-1 pt-3 border-t border-[#F1EEF5]">
         {daysOfWeek.map((day, idx) => (
           <div key={idx} className="flex flex-col items-center gap-1">
             <span className="text-[10px] font-semibold text-[#667085]">{day.label}</span>

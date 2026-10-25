@@ -37,7 +37,7 @@ export default function App() {
             position="top-right"
             richColors
             toastOptions={{
-              className: 'rounded-2xl border border-[#E2E8E4] shadow-md font-sans text-xs',
+              className: 'rounded-2xl border border-[#E9E4F0] shadow-md font-sans text-xs',
             }}
           />
         </BrowserRouter>

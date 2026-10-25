@@ -25,10 +25,10 @@ export function AppLayout() {
   const isWorkoutPage = location.pathname === '/active-workout';
 
   return (
-    <div className="elite-app-shell min-h-screen bg-[#F5FAF7] text-[#101828] flex">
+    <div className="elite-app-shell min-h-screen bg-[#F8F7FB] text-[#101828] flex">
       {/* Desktop Fixed Left Sidebar */}
       <Sidebar
-        className="hidden md:flex"
+        className="hidden lg:flex"
         onOpenJimm={() => setIsJimmOpen(true)}
         onOpenGoalPace={() => setIsGoalPaceOpen(true)}
         onOpenHelp={() => setIsHelpOpen(true)}
@@ -36,7 +36,7 @@ export function AppLayout() {
 
       {/* Mobile Drawer (Slide-out Sidebar for phone & tablet) */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden flex animate-fade-in" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-50 lg:hidden flex animate-fade-in" role="dialog" aria-modal="true">
           {/* Backdrop */}
           <div
             className="fixed inset-0 bg-neutral-900/60 backdrop-blur-xs transition-opacity"
@@ -75,7 +75,7 @@ export function AppLayout() {
           onToggleMobileMenu={() => setIsMobileMenuOpen(true)}
         />
 
-        <main className="elite-main flex-1 px-3 sm:px-6 lg:px-8 py-4 sm:py-6 w-full max-w-[1360px] mx-auto pb-24 md:pb-12 min-w-0">
+        <main className="elite-main flex-1 px-3 sm:px-6 lg:px-8 py-4 sm:py-6 w-full max-w-[1360px] mx-auto pb-24 lg:pb-12 min-w-0">
           <Outlet />
         </main>
 
@@ -85,18 +85,18 @@ export function AppLayout() {
 
       {/* Persistent Floating Live Workout Widget */}
       {session && !isWorkoutPage && (
-        <div className="fixed bottom-20 md:bottom-6 right-4 md:right-8 z-40 bg-gradient-to-r from-[#075B38] to-[#0A452B] text-white px-4 sm:px-5 py-3 rounded-2xl shadow-xl border border-emerald-400/40 flex items-center gap-3 sm:gap-4 animate-slide-up">
+        <div className="active-workout-floating-widget fixed bottom-20 md:bottom-6 right-4 md:right-8 z-40 bg-gradient-to-r from-[#5B21B6] to-[#4C1D95] text-white px-4 sm:px-5 py-3 rounded-2xl shadow-xl border border-violet-400/40 flex items-center gap-3 sm:gap-4 animate-slide-up">
           <div className="flex items-center gap-2.5">
             <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-violet-400"></span>
             </span>
             <div className="flex flex-col">
               <span className="font-heading font-black text-xs sm:text-sm text-white leading-tight flex items-center gap-1.5">
-                <Dumbbell size={13} className="text-emerald-300" />
+                <Dumbbell size={13} className="text-violet-300" />
                 <span>{session.dayName || 'Workout in Progress'}</span>
               </span>
-              <span className="text-[11px] text-emerald-200 font-mono tabular-nums font-semibold mt-0.5">
+              <span className="text-[11px] text-violet-200 font-mono tabular-nums font-semibold mt-0.5">
                 Elapsed: {formatDuration(elapsedSeconds)}
               </span>
             </div>
@@ -105,7 +105,7 @@ export function AppLayout() {
           <button
             type="button"
             onClick={() => navigate('/active-workout')}
-            className="px-3.5 py-1.5 rounded-xl bg-[#079447] hover:bg-[#075B38] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1 cursor-pointer shrink-0 ml-1"
+            className="px-3.5 py-1.5 rounded-xl bg-[#7C3AED] hover:bg-[#5B21B6] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1 cursor-pointer shrink-0 ml-1"
           >
             <span>Resume</span>
             <ChevronRight size={14} />

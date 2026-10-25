@@ -36,16 +36,16 @@ export function HeroBanner({
       {/* Left Section: Title, Subtitle, AI Badge */}
       <div className="flex-1 max-w-md xl:max-w-lg space-y-2.5 z-10 shrink-0">
         <div className="dashboard-hero-badge inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider">
-          <Sparkles size={11} className="fill-[#075B38] text-[#075B38]" />
+          <Sparkles size={11} className="fill-[#5B21B6] text-[#5B21B6]" />
           <span>AI FITNESS COMPANION</span>
         </div>
 
         <h1 className="font-heading font-black text-2xl sm:text-3xl lg:text-[34px] text-[#101828] tracking-tight leading-tight">
-          Ready to Overload, <span className="text-[#079447]">{userName}?</span>
+          Ready to Overload, <span className="text-[#7C3AED]">{userName}?</span>
         </h1>
 
         <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#101828]">
-          <Target size={15} className="text-[#079447] shrink-0" />
+          <Target size={15} className="text-[#7C3AED] shrink-0" />
           <span>Today's target: {dayName}.</span>
         </div>
         <p className="text-xs sm:text-sm text-[#667085] font-medium pl-6">

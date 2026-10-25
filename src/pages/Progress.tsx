@@ -60,7 +60,7 @@ export function Progress() {
       />
 
       {/* Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         <VolumeChart sessions={sessions} unit={unit} />
         <BodyWeightChart entries={bodyWeights} unit={unit} />
       </div>

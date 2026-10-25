@@ -59,16 +59,16 @@ export function QuickActionCards({
       <button
         type="button"
         onClick={onTrackProgress}
-        className="quick-action-card text-left p-4 sm:p-5 rounded-2xl bg-[#E8F7EC] border border-[#BBF7D0] hover:border-emerald-400 shadow-2xs hover:shadow-xs hover:-translate-y-0.5 transition-all duration-150 cursor-pointer group flex flex-col justify-between min-h-[124px]"
+        className="quick-action-card text-left p-4 sm:p-5 rounded-2xl bg-[#F3E8FF] border border-[#DDD6FE] hover:border-violet-400 shadow-2xs hover:shadow-xs hover:-translate-y-0.5 transition-all duration-150 cursor-pointer group flex flex-col justify-between min-h-[124px]"
       >
-        <div className="w-8 h-8 rounded-xl bg-emerald-100 text-[#079447] flex items-center justify-center shrink-0">
+        <div className="w-8 h-8 rounded-xl bg-violet-100 text-[#7C3AED] flex items-center justify-center shrink-0">
           <TrendingUp size={18} />
         </div>
         <div className="mt-3">
           <span className="font-heading font-black text-xs sm:text-[13px] text-[#101828] block leading-tight">
             Track Progress
           </span>
-          <span className="text-[10px] sm:text-[11px] font-medium text-[#667085] group-hover:text-[#079447] transition-colors leading-tight flex items-center gap-1 mt-1">
+          <span className="text-[10px] sm:text-[11px] font-medium text-[#667085] group-hover:text-[#7C3AED] transition-colors leading-tight flex items-center gap-1 mt-1">
             <span>Analytics</span>
             <ArrowRight size={10} className="group-hover:translate-x-0.5 transition-transform" />
           </span>

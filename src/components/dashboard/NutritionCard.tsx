@@ -25,11 +25,11 @@ export function NutritionCard({
   onLogMeals,
 }: NutritionCardProps) {
   return (
-    <div className="nutrition-summary-card bg-white rounded-2xl border border-[#E4EDE7] p-6 sm:p-7 shadow-xs space-y-6 card-elevated">
+    <div className="nutrition-summary-card bg-white rounded-2xl border border-[#E9E4F0] p-6 sm:p-7 shadow-xs space-y-6 card-elevated">
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3">
-          <div className="w-9 h-9 rounded-xl bg-[#E8F7EC] text-[#079447] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+          <div className="w-9 h-9 rounded-xl bg-[#F3E8FF] text-[#7C3AED] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
             <UtensilsCrossed size={17} />
           </div>
           <div>
@@ -46,7 +46,7 @@ export function NutritionCard({
         <button
           type="button"
           onClick={onLogMeals}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#079447] text-[#079447] hover:bg-[#E8F7EC] text-xs font-bold transition-colors cursor-pointer shrink-0 shadow-2xs"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#7C3AED] text-[#7C3AED] hover:bg-[#F3E8FF] text-xs font-bold transition-colors cursor-pointer shrink-0 shadow-2xs"
         >
           <Plus size={12} />
           <span>Log Meals →</span>

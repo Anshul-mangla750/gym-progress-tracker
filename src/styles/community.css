@@ -5,21 +5,21 @@
 /* Community Feed Post Card */
 .community-post-card {
   background-color: #FFFFFF;
-  border: 1px solid #E4EDE7;
+  border: 1px solid #E9E4F0;
   border-radius: 1rem;
   padding: 1.25rem;
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .community-post-card:hover {
-  border-color: #C5EBCE;
-  box-shadow: 0 4px 16px -2px rgba(7, 148, 71, 0.05);
+  border-color: #DDD6FE;
+  box-shadow: 0 4px 16px -2px rgba(124, 58, 237, 0.08);
 }
 
 /* User avatar ring */
 .avatar-ring-green {
-  border: 2px solid #079447;
-  box-shadow: 0 0 0 2px rgba(7, 148, 71, 0.15);
+  border: 2px solid #7C3AED;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.12);
 }
 
 /* Like & Cheer interactive button */
@@ -32,8 +32,8 @@
   font-size: 0.75rem;
   font-weight: 700;
   color: #667085;
-  background-color: #F8FAF9;
-  border: 1px solid #E4EDE7;
+  background-color: #FBFAFD;
+  border: 1px solid #E9E4F0;
   transition: all 0.15s ease;
 }
 

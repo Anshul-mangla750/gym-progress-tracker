@@ -33,7 +33,7 @@ export function WorkoutCard({
       {/* Section Header */}
       <div className="flex items-center justify-between gap-3 px-1">
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-emerald-50 text-[#079447] flex items-center justify-center shrink-0">
+          <div className="w-7 h-7 rounded-lg bg-violet-50 text-[#7C3AED] flex items-center justify-center shrink-0">
             <Calendar size={16} />
           </div>
           <h2 className="font-heading font-bold text-base sm:text-lg text-[#101828]">
@@ -47,9 +47,9 @@ export function WorkoutCard({
       </div>
 
       {/* Workout Card */}
-      <div className="bg-white rounded-2xl border border-[#E4EDE7] shadow-xs overflow-hidden card-elevated">
+      <div className="bg-white rounded-2xl border border-[#E9E4F0] shadow-xs overflow-hidden card-elevated">
         {/* Dark Green Workout Banner */}
-        <div className="workout-dark-banner relative overflow-hidden bg-gradient-to-r from-[#075B38] to-[#0A452B] p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-white">
+        <div className="workout-dark-banner relative overflow-hidden bg-gradient-to-r from-[#5B21B6] to-[#4C1D95] p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-white">
           <img src={heroAthleteImg} alt="" aria-hidden="true" className="workout-athlete-art" />
           {/* Dumbbell watermark */}
           <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-15 pointer-events-none">
@@ -58,7 +58,7 @@ export function WorkoutCard({
 
           <div className="relative z-10 space-y-1 min-w-0">
             <h3 className="font-heading font-black text-base sm:text-lg tracking-tight text-white truncate flex items-center gap-2">
-              <Dumbbell size={18} className="text-emerald-300 shrink-0" />
+              <Dumbbell size={18} className="text-violet-300 shrink-0" />
               <span>{workoutTitle}</span>
             </h3>
           </div>
@@ -68,19 +68,19 @@ export function WorkoutCard({
               <Clock size={11} />
               <span>{duration}</span>
             </span>
-            <span className="flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#E8F7EC]/20 text-[#C5EBCE] border border-white/10">
+            <span className="flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#F3E8FF]/20 text-[#DDD6FE] border border-white/10">
               <Layers size={11} />
               <span>{exercises.length} Exercises</span>
             </span>
-            <span className="flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#079447]/40 text-emerald-200 border border-emerald-400/30">
-              <Zap size={11} className="fill-emerald-200" />
+            <span className="flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#7C3AED]/40 text-violet-200 border border-violet-400/30">
+              <Zap size={11} className="fill-violet-200" />
               <span>Strength</span>
             </span>
           </div>
         </div>
 
         {/* Exercise List */}
-        <div className="p-4 sm:p-5 divide-y divide-[#F0F4F1] space-y-1">
+        <div className="p-4 sm:p-5 divide-y divide-[#F1EEF5] space-y-1">
           {exercises.map((ex, idx) => (
             <ExerciseRow
               key={ex.id || idx}
@@ -106,11 +106,11 @@ export function WorkoutCard({
         </div>
 
         {/* Start Button */}
-        <div className="p-5 sm:p-6 pt-2 border-t border-[#F0F4F1]">
+        <div className="p-5 sm:p-6 pt-2 border-t border-[#F1EEF5]">
           <button
             type="button"
             onClick={onStartWorkout}
-            className="w-full py-4 px-5 rounded-xl bg-gradient-to-r from-[#079447] to-[#075B38] hover:from-[#06833E] hover:to-[#064D2F] text-white font-heading font-black text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-xs hover:shadow-md transition-all cursor-pointer"
+            className="w-full py-4 px-5 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#5B21B6] hover:from-[#6D28D9] hover:to-[#4C1D95] text-white font-heading font-black text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-xs hover:shadow-md transition-all cursor-pointer"
           >
             <Play size={16} className="fill-white" />
             <span>Start Workout Session</span>
