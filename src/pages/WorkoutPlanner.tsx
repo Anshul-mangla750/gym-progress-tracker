@@ -162,7 +162,7 @@ export function WorkoutPlanner() {
   }, [splits, selectedCat, selectedFreq, searchQuery]);
 
   return (
-    <div className="space-y-6 animate-fade-in pb-12">
+    <div className="split-planner-page space-y-6 animate-fade-in pb-12">
       <PageHeader
         title="Workout Split Planner"
         subtitle="Explore evidence-based bodybuilding, strength, and calisthenics splits tailored to your weekly schedule"
@@ -190,7 +190,7 @@ export function WorkoutPlanner() {
       />
 
       {/* Filter & Search Bar Card */}
-      <div className="bg-white p-3.5 sm:p-5 rounded-3xl border border-[#E2E8E4] shadow-xs space-y-3 sm:space-y-4">
+      <div className="split-filter-panel bg-white p-3.5 sm:p-5 rounded-3xl border border-[#E2E8E4] shadow-xs space-y-3 sm:space-y-4">
         {/* Search Input + Frequency filter */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="relative w-full sm:w-96">
@@ -200,12 +200,12 @@ export function WorkoutPlanner() {
               placeholder="Search by split name, target muscle, or exercise..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-11 pl-10 pr-4 rounded-xl bg-[#F8FAF9] border border-[#E2E8E4] text-xs sm:text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#16A34A] focus:ring-2 focus:ring-emerald-500/15 transition-all"
+              className="w-full h-11 pl-10 pr-4 rounded-xl bg-[#F8FAF9] border border-[#E4EDE7] text-xs sm:text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#079447] focus:ring-2 focus:ring-emerald-500/15 transition-all"
             />
           </div>
 
           {/* Frequency selector buttons */}
-          <div className="flex items-center gap-1.5 w-full sm:w-auto overflow-x-auto no-scrollbar">
+          <div className="split-frequency-tabs flex items-center gap-1.5 w-full sm:w-auto overflow-x-auto no-scrollbar">
             <span className="text-xs font-bold text-neutral-400 uppercase tracking-wider mr-1 hidden lg:inline">
               Schedule:
             </span>
@@ -218,7 +218,7 @@ export function WorkoutPlanner() {
                   onClick={() => setSelectedFreq(f.id)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-[#16A34A] text-white shadow-xs'
+                      ? 'bg-[#079447] text-white shadow-xs'
                       : 'bg-neutral-100 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-200/70'
                   }`}
                 >
@@ -230,7 +230,7 @@ export function WorkoutPlanner() {
         </div>
 
         {/* Category Filter Chips */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pt-2 border-t border-[#E8ECE9]">
+        <div className="split-category-tabs flex items-center gap-2 overflow-x-auto no-scrollbar pt-2 border-t border-[#E8ECE9]">
           {CATEGORIES.map((cat) => {
             const isActive = selectedCat === cat.id;
             const count = splits.filter((s) => {
@@ -250,7 +250,7 @@ export function WorkoutPlanner() {
                 }`}
               >
                 <span>{cat.label}</span>
-                <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${isActive ? 'bg-[#16A34A] text-white' : 'bg-neutral-200 text-neutral-600'}`}>
+                <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${isActive ? 'bg-[#079447] text-white' : 'bg-neutral-200 text-neutral-600'}`}>
                   {count}
                 </span>
               </button>
@@ -293,13 +293,13 @@ export function WorkoutPlanner() {
               setSelectedFreq('all');
               setSearchQuery('');
             }}
-            className="px-4 py-2 rounded-xl bg-[#16A34A] text-white text-xs font-bold shadow-xs hover:bg-[#15803D] cursor-pointer transition-all"
+            className="px-4 py-2 rounded-xl bg-[#079447] text-white text-xs font-bold shadow-xs hover:bg-[#075B38] cursor-pointer transition-all"
           >
             Show All 10 Splits
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="split-card-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredSplits.map((split) => {
             const totalExercises = split.days.reduce((acc, d) => acc + d.exercises.length, 0);
 
@@ -307,11 +307,11 @@ export function WorkoutPlanner() {
               <div
                 key={split.id}
                 className={`
-                  flex flex-col justify-between rounded-3xl p-4 sm:p-6 transition-all duration-200 relative group
+                  split-program-card flex flex-col justify-between rounded-3xl p-4 sm:p-6 transition-all duration-200 relative group
                   ${
                     split.isActive
-                      ? 'bg-gradient-to-b from-white to-[#F6FCF8] border-2 border-[#16A34A] shadow-[0_12px_32px_-6px_rgba(22,163,74,0.18)]'
-                      : 'bg-white border border-[#E2E8E4] shadow-xs hover:shadow-md hover:border-emerald-300/80 hover:-translate-y-0.5'
+                      ? 'bg-gradient-to-b from-white to-[#F6FCF8] border-2 border-[#079447] shadow-[0_12px_32px_-6px_rgba(7,148,71,0.18)]'
+                      : 'bg-white border border-[#E4EDE7] shadow-xs hover:shadow-md hover:border-emerald-300/80 hover:-translate-y-0.5'
                   }
                 `}
               >
@@ -320,8 +320,8 @@ export function WorkoutPlanner() {
                   <div className="flex items-start justify-between gap-2 mb-3">
                     <div className="flex items-center gap-1.5 flex-wrap">
                       {split.isActive ? (
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-[#E8F8EE] text-[#15803D] border border-[#A7E2BE] shadow-2xs">
-                          <span className="w-2 h-2 rounded-full bg-[#16A34A] animate-pulse"></span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-[#E8F8EE] text-[#075B38] border border-[#A7E2BE] shadow-2xs">
+                          <span className="w-2 h-2 rounded-full bg-[#079447] animate-pulse"></span>
                           Active Program
                         </span>
                       ) : (
@@ -465,7 +465,7 @@ export function WorkoutPlanner() {
                     <button
                       type="button"
                       onClick={() => handleActivate(split)}
-                      className="px-3.5 py-1.5 rounded-xl bg-[#16A34A] hover:bg-[#15803D] text-white text-xs font-bold shadow-xs hover:shadow-md transition-all cursor-pointer flex items-center gap-1"
+                      className="px-3.5 py-1.5 rounded-xl bg-[#079447] hover:bg-[#075B38] text-white text-xs font-bold shadow-xs hover:shadow-md transition-all cursor-pointer flex items-center gap-1"
                     >
                       <span>Activate Program</span>
                       <span>→</span>

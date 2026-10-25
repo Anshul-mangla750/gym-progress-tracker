@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Card } from './Card';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 
 interface StatCardProps {
   title: string;
@@ -11,8 +11,9 @@ interface StatCardProps {
     value: number; // percentage or delta
     label?: string; // e.g. "vs last week"
     isPositiveGood?: boolean;
+    icon?: ReactNode;
   };
-  subtitle?: string;
+  subtitle?: ReactNode;
   className?: string;
   onClick?: () => void;
 }
@@ -29,30 +30,29 @@ export function StatCard({
   onClick,
 }: StatCardProps) {
   return (
-    <Card
-      padding="md"
+    <div
       onClick={onClick}
-      className={`flex flex-col justify-between bg-white border border-[#E5E9E6] rounded-2xl shadow-xs hover:shadow-md transition-all ${
+      className={`dashboard-stat-card flex flex-col justify-between bg-white border border-[#E4EDE7] rounded-2xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-all min-h-[128px] ${
         onClick ? 'cursor-pointer' : ''
       } ${className}`}
     >
-      <div className="flex items-start justify-between gap-1.5 sm:gap-2">
-        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+      <div className="flex items-start justify-between gap-2.5">
+        <div className="flex items-center gap-3 min-w-0">
           {icon && (
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center shrink-0">
               {icon}
             </div>
           )}
           <div className="min-w-0 flex-1">
-            <span className="text-[11px] sm:text-xs font-semibold text-neutral-500 block leading-tight truncate">
+            <span className="text-[11px] sm:text-xs font-semibold text-[#667085] block leading-tight truncate">
               {title}
             </span>
-            <div className="flex items-baseline gap-1 mt-0.5 min-w-0 flex-wrap">
-              <span className="text-lg sm:text-2xl lg:text-[26px] font-heading font-extrabold text-neutral-900 tracking-tight tabular-nums leading-none truncate">
+            <div className="flex items-baseline gap-1 mt-1 min-w-0 flex-wrap">
+              <span className="text-xl sm:text-2xl lg:text-[26px] font-heading font-black text-[#101828] tracking-tight tabular-nums leading-none truncate">
                 {value}
               </span>
               {unit && (
-                <span className="text-[10px] sm:text-xs font-semibold text-neutral-500 shrink-0">
+                <span className="text-[10px] sm:text-xs font-bold text-[#667085] shrink-0">
                   {unit}
                 </span>
               )}
@@ -61,37 +61,45 @@ export function StatCard({
         </div>
 
         {rightVisual && (
-          <div className="shrink-0 pt-0.5 hidden sm:block">
+          <div className="shrink-0 pt-0.5 hidden xs:block">
             {rightVisual}
           </div>
         )}
       </div>
 
       {(trend || subtitle) && (
-        <div className="mt-2.5 pt-2 border-t border-neutral-100 flex items-center justify-between text-[11px] sm:text-xs min-w-0">
+        <div className="mt-3 pt-2.5 border-t border-[#F0F4F1] flex items-center justify-between text-[11px] sm:text-xs min-w-0">
           {trend ? (
             <span
-              className={`inline-flex items-center gap-1 font-semibold tabular-nums min-w-0 truncate ${
+              className={`inline-flex items-center gap-1.5 font-bold tabular-nums min-w-0 truncate ${
                 trend.value > 0
                   ? trend.isPositiveGood !== false
-                    ? 'text-emerald-600'
-                    : 'text-rose-600'
-                  : 'text-neutral-500'
+                    ? 'text-[#079447]'
+                    : 'text-[#E95767]'
+                  : 'text-[#667085]'
               }`}
             >
-              <span className="text-[10px] shrink-0">↗</span>
+              {trend.icon ? (
+                trend.icon
+              ) : trend.value >= 0 ? (
+                <TrendingUp size={13} className="shrink-0 stroke-[2.5]" />
+              ) : (
+                <TrendingDown size={13} className="shrink-0 stroke-[2.5]" />
+              )}
               <span className="shrink-0">{trend.value > 0 ? `+${trend.value}%` : `${trend.value}%`}</span>
               {trend?.label && (
-                <span className="text-neutral-500 font-normal ml-0.5 truncate hidden xs:inline">
+                <span className="text-[#667085] font-medium ml-0.5 truncate">
                   {trend.label}
                 </span>
               )}
             </span>
           ) : subtitle ? (
-            <span className="text-neutral-500 font-normal truncate block w-full">{subtitle}</span>
+            <div className="text-[#667085] font-medium truncate flex items-center gap-1.5 w-full">
+              {subtitle}
+            </div>
           ) : null}
         </div>
       )}
-    </Card>
+    </div>
   );
 }

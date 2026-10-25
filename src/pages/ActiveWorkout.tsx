@@ -113,7 +113,7 @@ export function ActiveWorkout() {
   }
 
   return (
-    <div className="space-y-6 pb-20 animate-fade-in max-w-4xl mx-auto">
+    <div className="active-workout-page space-y-6 pb-20 animate-fade-in max-w-4xl mx-auto">
       {/* Active Workout Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 sm:p-5 bg-bg-card rounded-2xl border border-border-default sticky top-16 z-20 backdrop-blur-md bg-bg-card/90 shadow-xl">
         <div>

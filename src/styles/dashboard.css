@@ -1,0 +1,129 @@
+/* ── Dashboard Stylesheet ─────────────────────────────────────── */
+
+.dashboard-hero-card {
+  background: linear-gradient(135deg, #E8F7EC 0%, #F0FAF3 50%, #E2F5E8 100%);
+  border: 1px solid #C5EBCE;
+  box-shadow: 0 2px 8px -2px rgba(7, 148, 71, 0.08), 0 1px 3px rgba(16, 24, 40, 0.04);
+}
+
+.dashboard-hero-badge {
+  background: #D4F2DE;
+  color: #075B38;
+  border: 1px solid rgba(7, 91, 56, 0.12);
+}
+
+.dashboard-streak-card {
+  background: #FFFFFF;
+  border: 1px solid #E4EDE7;
+  box-shadow: 0 4px 14px -3px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.04);
+}
+
+.dashboard-streak-day-active {
+  background: #079447;
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px -1px rgba(7, 148, 71, 0.35);
+}
+
+.dashboard-streak-day-inactive {
+  background: #F3F6F4;
+  color: #667085;
+}
+
+/* ── Workout Card ────────────────────────────────────────────── */
+.workout-main-card {
+  background: #FFFFFF;
+  border: 1px solid #E4EDE7;
+  box-shadow: 0 4px 16px -4px rgba(16, 24, 40, 0.05), 0 1px 3px rgba(16, 24, 40, 0.04);
+}
+
+.workout-banner-dark {
+  background: linear-gradient(135deg, #075B38 0%, #094B2E 50%, #063822 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.exercise-row-item {
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.exercise-row-item:hover {
+  background: #E8F7EC;
+  transform: translateX(2px);
+}
+
+.exercise-number-badge {
+  background: #E8F7EC;
+  color: #079447;
+  font-weight: 800;
+}
+
+.workout-cta-btn {
+  background: linear-gradient(135deg, #079447 0%, #075B38 100%);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px -2px rgba(7, 148, 71, 0.35);
+}
+
+.workout-cta-btn:hover {
+  background: linear-gradient(135deg, #06833E 0%, #064D2F 100%);
+  box-shadow: 0 6px 20px -2px rgba(7, 148, 71, 0.45);
+  transform: translateY(-1px);
+}
+
+/* ── Nutrition Card ──────────────────────────────────────────── */
+.nutrition-main-card {
+  background: #FFFFFF;
+  border: 1px solid #E4EDE7;
+  box-shadow: 0 4px 16px -4px rgba(16, 24, 40, 0.05), 0 1px 3px rgba(16, 24, 40, 0.04);
+}
+
+.log-meals-btn {
+  border: 1.5px solid #079447;
+  color: #079447;
+  transition: all 0.18s ease;
+}
+
+.log-meals-btn:hover {
+  background: #E8F7EC;
+  transform: translateY(-1px);
+}
+
+/* ── Quick Action Cards ──────────────────────────────────────── */
+.quick-action-card {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.quick-action-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px -4px rgba(16, 24, 40, 0.08);
+}
+
+.quick-action-blue {
+  background: linear-gradient(180deg, #F0F6FE 0%, #FFFFFF 100%);
+  border: 1px solid #BFDBFE;
+}
+.quick-action-blue:hover {
+  border-color: #60A5FA;
+}
+
+.quick-action-orange {
+  background: linear-gradient(180deg, #FFF7ED 0%, #FFFFFF 100%);
+  border: 1px solid #FED7AA;
+}
+.quick-action-orange:hover {
+  border-color: #FB923C;
+}
+
+.quick-action-green {
+  background: linear-gradient(180deg, #F0FAF3 0%, #FFFFFF 100%);
+  border: 1px solid #BBF7D0;
+}
+.quick-action-green:hover {
+  border-color: #4ADE80;
+}
+
+.quick-action-purple {
+  background: linear-gradient(180deg, #FAF5FF 0%, #FFFFFF 100%);
+  border: 1px solid #DDD6FE;
+}
+.quick-action-purple:hover {
+  border-color: #A78BFA;
+}

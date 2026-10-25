@@ -60,7 +60,7 @@ export function ExerciseLibrary() {
   };
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="exercise-library-page space-y-6 animate-fade-in">
       <PageHeader
         title="Exercise Library"
         subtitle="Explore compound and isolation movements, anatomy targets, and coaching cues"
@@ -85,7 +85,7 @@ export function ExerciseLibrary() {
             placeholder="Search exercises by name, primary or secondary muscle..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full h-11 pl-10 pr-4 rounded-xl bg-[#F8FAF9] border border-[#E2E8E4] text-neutral-900 placeholder:text-neutral-400 text-sm focus:outline-none focus:border-[#16A34A] focus:ring-2 focus:ring-[#16A34A]/20 transition-all"
+            className="w-full h-11 pl-10 pr-4 rounded-xl bg-[#F8FAF9] border border-[#E4EDE7] text-[#101828] placeholder:text-[#667085] text-sm focus:outline-none focus:border-[#079447] focus:ring-2 focus:ring-[#079447]/20 transition-all"
           />
         </div>
 
@@ -96,8 +96,8 @@ export function ExerciseLibrary() {
             onClick={() => setSelectedMuscle('all')}
             className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap cursor-pointer transition-all ${
               selectedMuscle === 'all'
-                ? 'bg-[#16A34A] text-white shadow-xs'
-                : 'bg-neutral-100 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-200/80'
+                ? 'bg-[#079447] text-white shadow-xs'
+                : 'bg-neutral-100 text-[#667085] hover:text-[#101828] hover:bg-neutral-200/80'
             }`}
           >
             All Muscles
@@ -109,8 +109,8 @@ export function ExerciseLibrary() {
               onClick={() => setSelectedMuscle(m.value as MuscleGroup)}
               className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap cursor-pointer capitalize transition-all ${
                 selectedMuscle === m.value
-                  ? 'bg-[#16A34A] text-white shadow-xs'
-                  : 'bg-neutral-100 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-200/80'
+                  ? 'bg-[#079447] text-white shadow-xs'
+                  : 'bg-neutral-100 text-[#667085] hover:text-[#101828] hover:bg-neutral-200/80'
               }`}
             >
               {m.label}

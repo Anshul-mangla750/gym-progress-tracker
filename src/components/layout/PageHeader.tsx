@@ -16,7 +16,7 @@ export function PageHeader({
   className = '',
 }: PageHeaderProps) {
   return (
-    <div className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8 ${className}`}>
+    <div className={`app-page-header flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8 ${className}`}>
       <div>
         <div className="flex items-center gap-2.5">
           <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-text-primary tracking-tight">

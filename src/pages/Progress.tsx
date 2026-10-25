@@ -43,7 +43,7 @@ export function Progress() {
   const personalRecords = sessions.flatMap((s) => s.personalRecords || []);
 
   return (
-    <div className="space-y-6 sm:space-y-8 animate-fade-in max-w-6xl mx-auto">
+    <div className="progress-page space-y-6 sm:space-y-8 animate-fade-in max-w-6xl mx-auto">
       <PageHeader
         title="Progress & Analytics"
         subtitle="Track long-term progressive overload volume trends, personal records, and body composition"

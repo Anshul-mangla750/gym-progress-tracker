@@ -121,7 +121,7 @@ export function Community() {
   };
 
   return (
-    <div className="space-y-6 animate-fade-in max-w-4xl mx-auto pb-12">
+    <div className="community-page space-y-6 animate-fade-in max-w-4xl mx-auto pb-12">
       <PageHeader
         title="Community & Athlete Wins"
         subtitle="Connect with athletes pushing progressive overload, celebrate PR milestones, and ask questions"
@@ -149,8 +149,8 @@ export function Community() {
               onClick={() => setSelectedCat(cat.id)}
               className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap cursor-pointer transition-all flex items-center gap-1.5 ${
                 isActive
-                  ? 'bg-[#16A34A] text-white shadow-xs'
-                  : 'bg-white text-neutral-600 hover:text-neutral-900 border border-[#E5E9E6] hover:bg-neutral-50'
+                  ? 'bg-[#079447] text-white shadow-xs'
+                  : 'bg-white text-neutral-600 hover:text-neutral-900 border border-[#E4EDE7] hover:bg-neutral-50'
               }`}
             >
               {Icon && <Icon size={13} />}

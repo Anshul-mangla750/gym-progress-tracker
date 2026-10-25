@@ -90,7 +90,7 @@ export function Profile() {
   };
 
   return (
-    <div className="space-y-6 sm:space-y-8 animate-fade-in max-w-4xl mx-auto pb-12">
+    <div className="profile-page space-y-6 sm:space-y-8 animate-fade-in max-w-4xl mx-auto pb-12">
       <PageHeader
         title="Athlete Profile & Engine Settings"
         subtitle="Configure your progressive overload rules, measurement units, and daily nutrition targets"

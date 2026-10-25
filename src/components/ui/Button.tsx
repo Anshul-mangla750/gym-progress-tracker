@@ -14,15 +14,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-[#16A34A] hover:bg-[#15803D] active:bg-[#166534] text-white font-bold shadow-xs hover:shadow-md hover:shadow-emerald-600/20 active:scale-[0.98]',
+    'bg-[#079447] hover:bg-[#075B38] active:bg-[#05482C] text-white font-bold shadow-xs hover:shadow-md hover:shadow-emerald-700/20 active:scale-[0.98]',
   secondary:
-    'bg-white border border-[#E5E9E6] text-neutral-700 hover:bg-[#F3F6F4] hover:text-neutral-900 shadow-xs active:scale-[0.98]',
+    'bg-white border border-[#E4EDE7] text-[#101828] hover:bg-[#F8FAF9] shadow-xs active:scale-[0.98]',
   ghost:
-    'bg-transparent text-neutral-600 hover:text-neutral-900 hover:bg-[#F3F6F4] active:scale-[0.98]',
+    'bg-transparent text-[#667085] hover:text-[#101828] hover:bg-[#F8FAF9] active:scale-[0.98]',
   danger:
-    'bg-rose-50 text-rose-600 hover:bg-rose-100 border border-rose-200 active:scale-[0.98]',
+    'bg-[#FEE8EB] text-[#E95767] hover:bg-rose-100 border border-rose-200 active:scale-[0.98]',
   success:
-    'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 active:scale-[0.98]',
+    'bg-[#E8F7EC] text-[#075B38] hover:bg-emerald-100 border border-emerald-200 active:scale-[0.98]',
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

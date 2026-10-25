@@ -51,7 +51,7 @@ export function Workouts() {
   };
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="workouts-page space-y-6 animate-fade-in">
       <PageHeader
         title="Workouts"
         subtitle="Execute your structured training splits or record freestyle sessions"
@@ -117,11 +117,11 @@ export function Workouts() {
           </div>
 
           {/* Days Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="workout-days-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {activeSplit?.days.map((day, idx) => (
               <div
                 key={day.id}
-                className="bg-white rounded-3xl p-6 border border-[#E2E8E4] shadow-xs hover:shadow-md hover:border-emerald-300/80 hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between"
+                className="workout-day-card bg-white rounded-3xl p-6 border border-[#E2E8E4] shadow-xs hover:shadow-md hover:border-emerald-300/80 hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between pb-3.5 border-b border-[#E8ECE9] mb-3.5">
@@ -161,7 +161,7 @@ export function Workouts() {
                   <button
                     type="button"
                     onClick={() => handleStartDay(day)}
-                    className="w-full py-3 px-4 rounded-xl bg-[#16A34A] hover:bg-[#15803D] text-white font-heading font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs hover:shadow-md transition-all cursor-pointer"
+                    className="w-full py-3 px-4 rounded-xl bg-[#079447] hover:bg-[#075B38] text-white font-heading font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs hover:shadow-md transition-all cursor-pointer"
                   >
                     <Play size={14} className="fill-white" />
                     <span>Start Workout</span>

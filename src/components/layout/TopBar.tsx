@@ -1,14 +1,29 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Zap, Search, Bell, Crown, Flame, ChevronDown, Play, Dumbbell, CalendarDays, UtensilsCrossed, BarChart2, X } from 'lucide-react';
+import {
+  Menu,
+  Search,
+  Bell,
+  Crown,
+  Flame,
+  ChevronDown,
+  Play,
+  Dumbbell,
+  CalendarDays,
+  UtensilsCrossed,
+  BarChart2,
+  X,
+  Zap,
+} from 'lucide-react';
 import alexAvatarImg from '../../assets/alex_vance.jpg';
 
 interface TopBarProps {
   activeSessionName?: string;
   onOpenActiveSession?: () => void;
-  onOpenJimm: () => void;
+  onOpenJimm?: () => void;
   onOpenGoalPace: () => void;
   onOpenInstallModal: () => void;
+  onToggleMobileMenu?: () => void;
 }
 
 const SEARCH_ITEMS = [
@@ -41,9 +56,11 @@ export function TopBar({
   onOpenActiveSession,
   onOpenGoalPace,
   onOpenInstallModal,
+  onToggleMobileMenu,
 }: TopBarProps) {
   const [search, setSearch] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
@@ -86,30 +103,41 @@ export function TopBar({
     }
   };
 
-  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
-
   return (
-    <header className="elite-topbar border-b border-[#E5E9E6] bg-white sticky top-0 z-30 px-3 sm:px-6 shrink-0">
-      <div className="h-16 flex items-center justify-between gap-2 sm:gap-4">
-        {/* Mobile Brand Logo */}
-        <div className="flex md:hidden items-center gap-1.5 sm:gap-2 shrink-0">
-          <div className="w-8 h-8 rounded-xl bg-[#16A34A] flex items-center justify-center text-white font-black shadow-xs shrink-0">
-            <Zap size={18} className="fill-white stroke-white" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-heading font-black text-sm sm:text-base text-neutral-900 tracking-tight leading-none">
-              ELITE<span className="text-[#16A34A]">ENGINE</span>
-            </span>
-            <span className="text-[7.5px] sm:text-[8px] uppercase tracking-widest text-neutral-400 font-bold mt-0.5">
-              AI Fitness
-            </span>
+    <header className="elite-topbar border-b border-[#E4EDE7] bg-white sticky top-0 z-30 px-3 sm:px-6 shrink-0">
+      <div className="h-[72px] flex items-center justify-between gap-3 sm:gap-4">
+        {/* Left side: Mobile Hamburger menu button + Logo (on mobile) */}
+        <div className="flex items-center gap-2.5 shrink-0">
+          {/* Hamburger toggle button for phone / tablet drawer */}
+          <button
+            type="button"
+            onClick={onToggleMobileMenu}
+            className="md:hidden w-10 h-10 rounded-xl border border-[#E4EDE7] bg-white hover:bg-neutral-50 flex items-center justify-center text-[#101828] transition-colors cursor-pointer"
+            aria-label="Open sidebar menu"
+          >
+            <Menu size={20} />
+          </button>
+
+          {/* Mobile Brand Logo */}
+          <div className="flex md:hidden items-center gap-2 shrink-0">
+            <div className="w-8 h-8 rounded-xl bg-[#079447] flex items-center justify-center text-white font-black shadow-xs shrink-0">
+              <Zap size={16} className="fill-white stroke-white" />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-heading font-black text-sm text-[#101828] tracking-tight leading-none">
+                ELITE<span className="text-[#079447]">ENGINE</span>
+              </span>
+              <span className="text-[7.5px] uppercase tracking-widest text-[#667085] font-bold mt-0.5">
+                AI Fitness
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Global Search Pill Input (Desktop) */}
-        <div ref={dropdownRef} className="w-80 md:w-96 hidden md:block relative">
+        {/* Global Search Pill Input (Desktop/Laptop) */}
+        <div ref={dropdownRef} className="w-80 md:w-96 lg:w-[420px] hidden md:block relative">
           <div className="relative flex items-center">
-            <Search size={16} className="absolute left-3.5 text-neutral-400 pointer-events-none" />
+            <Search size={16} className="absolute left-3.5 text-[#667085] pointer-events-none" />
             <input
               type="text"
               placeholder="Search workouts, exercises, foods..."
@@ -122,27 +150,33 @@ export function TopBar({
                 if (search.trim().length >= 2) setIsDropdownOpen(true);
               }}
               onKeyDown={handleKeyDown}
-              style={{ paddingLeft: '2.5rem', paddingRight: search ? '2rem' : '1rem' }}
-              className="w-full h-10 rounded-xl bg-[#F8FAF9] border border-[#E5E9E6] text-xs sm:text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#16A34A] focus:ring-2 focus:ring-emerald-500/15 transition-all"
+              style={{ paddingLeft: '2.5rem', paddingRight: search ? '2rem' : '4.5rem' }}
+              className="w-full h-11 rounded-xl bg-[#F8FAF9] border border-[#E4EDE7] text-xs sm:text-sm text-[#101828] placeholder:text-[#667085] focus:outline-none focus:border-[#079447] focus:ring-2 focus:ring-emerald-500/15 transition-all"
             />
-            {search && (
+            {search ? (
               <button
                 type="button"
                 onClick={() => {
                   setSearch('');
                   setIsDropdownOpen(false);
                 }}
-                className="absolute right-3 text-neutral-400 hover:text-neutral-700 cursor-pointer"
+                className="absolute right-3 text-[#667085] hover:text-[#101828] cursor-pointer"
               >
                 <X size={14} />
               </button>
+            ) : (
+              <div className="absolute right-3 hidden xl:flex items-center pointer-events-none">
+                <kbd className="px-1.5 py-0.5 rounded-md bg-white border border-[#E4EDE7] text-[10px] text-[#667085] font-mono shadow-2xs">
+                  ⌘K
+                </kbd>
+              </div>
             )}
           </div>
 
           {/* Search Results Dropdown (Desktop) */}
           {isDropdownOpen && searchResults.length > 0 && (
-            <div className="absolute top-12 left-0 right-0 bg-white rounded-2xl border border-[#E2E8E4] shadow-xl p-2 z-50 animate-fade-in space-y-1">
-              <div className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-neutral-400">
+            <div className="absolute top-13 left-0 right-0 bg-white rounded-2xl border border-[#E4EDE7] shadow-xl p-2 z-50 animate-fade-in space-y-1">
+              <div className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#667085]">
                 Matching Results ({searchResults.length})
               </div>
               {searchResults.map((item, idx) => {
@@ -152,22 +186,22 @@ export function TopBar({
                     key={idx}
                     type="button"
                     onClick={() => handleSelectResult(item.path)}
-                    className="w-full text-left px-3 py-2 rounded-xl hover:bg-[#F3F8F5] transition-colors flex items-center justify-between gap-2 group cursor-pointer"
+                    className="w-full text-left px-3 py-2 rounded-xl hover:bg-[#E8F7EC] transition-colors flex items-center justify-between gap-2 group cursor-pointer"
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <div className="w-7 h-7 rounded-lg bg-emerald-50 text-[#16A34A] flex items-center justify-center shrink-0">
+                      <div className="w-7 h-7 rounded-lg bg-emerald-50 text-[#079447] flex items-center justify-center shrink-0">
                         <Icon size={14} />
                       </div>
                       <div className="min-w-0">
-                        <span className="font-heading font-bold text-xs sm:text-sm text-neutral-900 group-hover:text-emerald-700 block truncate">
+                        <span className="font-heading font-bold text-xs sm:text-sm text-[#101828] group-hover:text-[#079447] block truncate">
                           {item.title}
                         </span>
-                        <span className="text-[11px] text-neutral-500 block truncate">
+                        <span className="text-[11px] text-[#667085] block truncate">
                           {item.subtitle}
                         </span>
                       </div>
                     </div>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-neutral-100 text-neutral-600 shrink-0">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-neutral-100 text-[#667085] shrink-0">
                       {item.category}
                     </span>
                   </button>
@@ -177,81 +211,83 @@ export function TopBar({
           )}
         </div>
 
-        {/* Right controls */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+        {/* Right Controls */}
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {/* Mobile search toggle button */}
           <button
             type="button"
             onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
-            className="md:hidden w-8 h-8 rounded-xl border border-neutral-200 bg-white hover:bg-neutral-50 flex items-center justify-center text-neutral-600 transition-colors cursor-pointer"
+            className="md:hidden w-9 h-9 rounded-xl border border-[#E4EDE7] bg-white hover:bg-neutral-50 flex items-center justify-center text-[#667085] transition-colors cursor-pointer"
             title="Search"
           >
-            <Search size={15} />
+            <Search size={16} />
           </button>
 
+          {/* Active Workout Indicator (if active) */}
           {activeSessionName && (
             <button
               type="button"
               onClick={onOpenActiveSession}
-              className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-[#166534] text-[11px] sm:text-xs font-bold hover:bg-emerald-100 transition-all cursor-pointer max-w-[100px] xs:max-w-[140px] sm:max-w-none truncate"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-[#E8F7EC] border border-emerald-200 text-[#075B38] text-[11px] sm:text-xs font-bold hover:bg-emerald-100 transition-all cursor-pointer max-w-[120px] xs:max-w-[150px] sm:max-w-none truncate"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0 animate-ping"></span>
-              <Play size={9} className="fill-emerald-600 text-emerald-600 shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#079447] shrink-0 animate-ping"></span>
+              <Play size={10} className="fill-[#079447] text-[#079447] shrink-0" />
               <span className="hidden sm:inline">Active:</span> <span className="truncate">{activeSessionName}</span>
             </button>
           )}
 
-          {/* Upgrade to Pro button */}
+          {/* Upgrade to Pro Button with Crown Icon */}
           <button
             type="button"
             onClick={onOpenInstallModal}
-            className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border border-neutral-200 bg-white hover:bg-neutral-50 text-xs font-semibold text-neutral-800 transition-colors cursor-pointer shadow-2xs"
+            className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-[#E4EDE7] bg-white hover:bg-[#F8FAF9] text-xs font-semibold text-[#101828] transition-colors cursor-pointer shadow-2xs"
           >
-            <Crown size={14} className="text-amber-500 fill-amber-500" />
+            <Crown size={15} className="text-[#FF7A00] fill-[#FF7A00]" />
             <span>Upgrade to Pro</span>
           </button>
 
-          {/* Streak indicator */}
-          <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-xl bg-orange-50/80 border border-orange-200 text-xs font-bold text-neutral-800">
-            <Flame size={13} className="text-orange-500 fill-orange-500 shrink-0" />
+          {/* Streak Indicator with Fire Icon (orange accent) */}
+          <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-xl bg-[#FFF4E6] border border-[#FFDEC2] text-xs font-bold text-[#101828]">
+            <Flame size={15} className="text-[#FF7A00] fill-[#FF7A00] shrink-0" />
             <span className="tabular-nums">4</span>
-            <span className="text-[11px] text-neutral-500 hidden sm:inline font-medium">Streak</span>
+            <span className="text-[11px] text-[#667085] hidden sm:inline font-medium">Streak</span>
           </div>
 
           {/* Notification Bell */}
           <button
             type="button"
             onClick={onOpenInstallModal}
-            className="hidden xs:flex w-8 h-8 sm:w-9 sm:h-9 rounded-xl border border-neutral-200 bg-white hover:bg-neutral-50 items-center justify-center text-neutral-600 transition-colors cursor-pointer shadow-2xs"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-[#E4EDE7] bg-white hover:bg-neutral-50 flex items-center justify-center text-[#667085] transition-colors cursor-pointer shadow-2xs relative"
             title="Notifications"
           >
-            <Bell size={15} />
+            <Bell size={16} />
+            <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#079447] ring-2 ring-white"></span>
           </button>
 
-          {/* User profile button */}
+          {/* User Profile Avatar with Name & Dropdown */}
           <button
             type="button"
             onClick={onOpenGoalPace}
-            className="flex items-center gap-1.5 sm:gap-2 pl-0.5 sm:pl-1 pr-1 sm:pr-2 py-1 rounded-xl hover:bg-neutral-100 transition-colors cursor-pointer"
+            className="flex items-center gap-2 pl-1 pr-1.5 sm:pr-2.5 py-1 rounded-xl hover:bg-neutral-100 transition-colors cursor-pointer"
           >
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-neutral-200 overflow-hidden shrink-0 shadow-2xs">
+            <div className="w-8 h-8 rounded-full border border-[#E4EDE7] overflow-hidden shrink-0 shadow-2xs">
               <img
                 src={alexAvatarImg}
                 alt="Alex Vance"
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="hidden sm:inline font-semibold text-xs text-neutral-800">Alex Vance</span>
-            <ChevronDown size={14} className="text-neutral-400 hidden sm:inline" />
+            <span className="hidden sm:inline font-semibold text-xs sm:text-[13px] text-[#101828]">Alex Vance</span>
+            <ChevronDown size={14} className="text-[#667085] hidden sm:inline" />
           </button>
         </div>
       </div>
 
       {/* Expandable Mobile Search Bar */}
       {isMobileSearchOpen && (
-        <div className="md:hidden pb-3 pt-1 border-t border-[#EAEFEA] animate-slide-down">
+        <div className="md:hidden pb-3 pt-1 border-t border-[#E4EDE7] animate-slide-down">
           <div className="relative flex items-center">
-            <Search size={15} className="absolute left-3 text-neutral-400 pointer-events-none" />
+            <Search size={15} className="absolute left-3 text-[#667085] pointer-events-none" />
             <input
               type="text"
               autoFocus
@@ -263,7 +299,7 @@ export function TopBar({
               }}
               onKeyDown={handleKeyDown}
               style={{ paddingLeft: '2.25rem', paddingRight: '2rem' }}
-              className="w-full h-9 rounded-xl bg-[#F8FAF9] border border-[#E5E9E6] text-xs text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#16A34A]"
+              className="w-full h-10 rounded-xl bg-[#F8FAF9] border border-[#E4EDE7] text-xs text-[#101828] placeholder:text-[#667085] focus:outline-none focus:border-[#079447]"
             />
             <button
               type="button"
@@ -271,15 +307,15 @@ export function TopBar({
                 setIsMobileSearchOpen(false);
                 setSearch('');
               }}
-              className="absolute right-2.5 text-neutral-400 hover:text-neutral-700"
+              className="absolute right-2.5 text-[#667085] hover:text-[#101828]"
             >
               <X size={14} />
             </button>
           </div>
 
-          {/* Mobile search results */}
+          {/* Mobile Search Results */}
           {search.trim().length >= 2 && searchResults.length > 0 && (
-            <div className="mt-2 bg-white rounded-xl border border-[#E2E8E4] shadow-lg p-1.5 space-y-1">
+            <div className="mt-2 bg-white rounded-xl border border-[#E4EDE7] shadow-lg p-1.5 space-y-1">
               {searchResults.map((item, idx) => {
                 const Icon = item.icon;
                 return (
@@ -290,22 +326,22 @@ export function TopBar({
                       handleSelectResult(item.path);
                       setIsMobileSearchOpen(false);
                     }}
-                    className="w-full text-left px-2.5 py-2 rounded-lg hover:bg-neutral-50 flex items-center justify-between gap-2"
+                    className="w-full text-left px-2.5 py-2 rounded-lg hover:bg-[#E8F7EC] flex items-center justify-between gap-2"
                   >
                     <div className="flex items-center gap-2 min-w-0">
-                      <div className="w-6 h-6 rounded-md bg-emerald-50 text-[#16A34A] flex items-center justify-center shrink-0">
+                      <div className="w-6 h-6 rounded-md bg-emerald-50 text-[#079447] flex items-center justify-center shrink-0">
                         <Icon size={12} />
                       </div>
                       <div className="min-w-0">
-                        <span className="font-bold text-xs text-neutral-900 block truncate">
+                        <span className="font-bold text-xs text-[#101828] block truncate">
                           {item.title}
                         </span>
-                        <span className="text-[10px] text-neutral-500 block truncate">
+                        <span className="text-[10px] text-[#667085] block truncate">
                           {item.subtitle}
                         </span>
                       </div>
                     </div>
-                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-neutral-100 text-neutral-600 shrink-0">
+                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-neutral-100 text-[#667085] shrink-0">
                       {item.category}
                     </span>
                   </button>

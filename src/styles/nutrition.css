@@ -1,0 +1,87 @@
+/* ==========================================================================
+   ELITEENGINE — NUTRITION MODULE STYLES
+   ========================================================================== */
+
+/* Date navigation header */
+.nutrition-date-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #FFFFFF;
+  border: 1px solid #E4EDE7;
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+}
+
+.nutrition-date-nav button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  color: #667085;
+  transition: all 0.15s ease;
+}
+
+.nutrition-date-nav button:hover {
+  background-color: #E8F7EC;
+  color: #079447;
+}
+
+/* Meal Section Card */
+.nutrition-meal-card {
+  border: 1px solid #E4EDE7;
+  border-radius: 1rem;
+  background-color: #FFFFFF;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nutrition-meal-card:hover {
+  border-color: #C5EBCE;
+  box-shadow: 0 4px 16px -2px rgba(7, 148, 71, 0.06);
+}
+
+/* Food Item Row */
+.nutrition-food-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  transition: background-color 0.15s ease;
+}
+
+.nutrition-food-row:hover {
+  background-color: #F8FAF9;
+}
+
+/* Macro progress bars */
+.macro-progress-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: #F0F4F1;
+  overflow: hidden;
+}
+
+.macro-progress-fill-protein {
+  height: 100%;
+  background: linear-gradient(90deg, #079447 0%, #10B981 100%);
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}
+
+.macro-progress-fill-carbs {
+  height: 100%;
+  background: linear-gradient(90deg, #F5C542 0%, #FBBF24 100%);
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}
+
+.macro-progress-fill-fat {
+  height: 100%;
+  background: linear-gradient(90deg, #2585E8 0%, #3B82F6 100%);
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}

@@ -124,7 +124,7 @@ export function Nutrition() {
   };
 
   return (
-    <div className="space-y-6 animate-fade-in max-w-5xl mx-auto">
+    <div className="nutrition-page space-y-6 animate-fade-in max-w-5xl mx-auto">
       {/* Date Header & Navigation */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-bg-card rounded-2xl border border-border-default">
         <div>
