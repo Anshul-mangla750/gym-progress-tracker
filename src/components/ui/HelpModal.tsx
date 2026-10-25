@@ -38,7 +38,7 @@ export function HelpModal({ isOpen, onClose }: HelpModalProps) {
               <span>How does Progressive Overload work?</span>
             </div>
             <p className="text-neutral-600 text-xs leading-relaxed">
-              VYQOR automatically monitors your completed sets. When you hit the top of your target rep range with proper form, Jimm AI prompts a 2.5kg or 1-rep increase on your next workout.
+              VYQOR automatically monitors your completed sets. When you hit the top of your target rep range with proper form, Jimm suggests a 2.5kg or 1-rep increase on your next workout.
             </p>
           </div>
 
@@ -55,10 +55,10 @@ export function HelpModal({ isOpen, onClose }: HelpModalProps) {
           <div className="p-3.5 rounded-xl bg-[#FBFAFD] border border-[#E9E4F0] space-y-1">
             <div className="flex items-center gap-2 font-bold text-neutral-900">
               <Sparkles size={15} className="text-[#7540E8]" />
-              <span>What is Jimm AI?</span>
+              <span>What is Jimm?</span>
             </div>
             <p className="text-neutral-600 text-xs leading-relaxed">
-              Jimm is your 24/7 intelligent training partner. Ask him to generate periodized splits, suggest healthy post-workout snacks, or calculate rest timers tailored to your recovery.
+              Jimm offers basic training and nutrition suggestions using the profile, workout plan, sessions, and meal logs saved in this browser. The coach does not send your data to an external service.
             </p>
           </div>
 

@@ -75,7 +75,7 @@ export function QuickActionCards({
         </div>
       </button>
 
-      {/* Card 4 — Ask Jimm AI */}
+      {/* Card 4 — Ask Jimm */}
       <button
         type="button"
         onClick={onAskJimm}
@@ -86,10 +86,10 @@ export function QuickActionCards({
         </div>
         <div className="mt-3">
           <span className="font-heading font-black text-xs sm:text-[13px] text-[#101828] block leading-tight">
-            Ask Jimm AI
+            Ask Jimm
           </span>
           <span className="text-[10px] sm:text-[11px] font-medium text-[#667085] group-hover:text-[#7540E8] transition-colors leading-tight flex items-center gap-1 mt-1">
-            <span>AI coach</span>
+            <span>Fitness coach</span>
             <ArrowRight size={10} className="group-hover:translate-x-0.5 transition-transform" />
           </span>
         </div>

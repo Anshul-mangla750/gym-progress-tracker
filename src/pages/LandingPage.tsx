@@ -46,7 +46,7 @@ export function LandingPage() {
           <a href="#meaning" className="transition-colors hover:text-violet-700">The VYQOR mindset</a>
         </nav>
 
-        <Link to="/auth" className="inline-flex items-center gap-2 rounded-xl bg-[#171321] px-4 py-2.5 text-xs font-bold text-white shadow-sm transition hover:bg-violet-800 sm:px-5 sm:text-sm">
+        <Link to="/dashboard" className="inline-flex items-center gap-2 rounded-xl bg-[#171321] px-4 py-2.5 text-xs font-bold text-white shadow-sm transition hover:bg-violet-800 sm:px-5 sm:text-sm">
           Open app <ArrowRight size={15} />
         </Link>
       </header>
@@ -65,7 +65,7 @@ export function LandingPage() {
             Meet VYQOR: the fitness companion that brings your training, nutrition, and progress into one focused place.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link to="/auth?mode=signup" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#7C3AED] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-violet-300/40 transition hover:-translate-y-0.5 hover:bg-[#6D28D9]">
+            <Link to="/dashboard" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#7C3AED] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-violet-300/40 transition hover:-translate-y-0.5 hover:bg-[#6D28D9]">
               Start your quest <ArrowRight size={17} />
             </Link>
             <a href="#features" className="inline-flex min-h-12 items-center justify-center rounded-xl border border-[#E6E1EC] bg-white/80 px-6 py-3 text-sm font-semibold text-[#343044] transition hover:border-violet-300 hover:bg-violet-50/70">
@@ -130,7 +130,7 @@ export function LandingPage() {
           <h2 className="mt-3 max-w-2xl font-heading text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">Vision sets the direction.<br className="hidden sm:block" /> Your quest creates the change.</h2>
           <p className="mt-4 max-w-xl text-sm leading-6 text-[#625D70] sm:text-base">Overcome the plateaus with steady effort. Let the results speak for themselves.</p>
         </div>
-        <Link to="/auth?mode=signup" className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-[#171321] px-6 py-3 text-sm font-bold text-white transition hover:bg-violet-800">
+        <Link to="/dashboard" className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-[#171321] px-6 py-3 text-sm font-bold text-white transition hover:bg-violet-800">
           Go to your dashboard <ArrowRight size={16} />
         </Link>
       </section>

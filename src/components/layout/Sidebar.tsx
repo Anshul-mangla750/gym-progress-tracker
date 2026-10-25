@@ -13,7 +13,6 @@ import {
   Sparkles,
   X,
   Play,
-  LogOut,
 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { useActiveWorkout } from '../../hooks/useActiveWorkout';
@@ -56,7 +55,7 @@ export function Sidebar({
   onOpenGoalPace,
   onOpenHelp,
 }: SidebarProps) {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const { session, elapsedSeconds } = useActiveWorkout();
   const navigate = useNavigate();
 
@@ -190,14 +189,14 @@ export function Sidebar({
         {/* ── Visual Section Divider ────────────────────────────── */}
         <div className="my-3.5 border-t border-[#E9E4F0]/80" />
 
-        {/* ── Ask Jimm AI Coach Card ────────────────────────────── */}
+        {/* ── Ask Jimm Fitness Coach Card ───────────────────────── */}
         <div>
           <div className="p-4 rounded-2xl bg-[#F3E8FF] border border-[#DDD6FE] shadow-2xs space-y-3">
             <div className="flex items-center gap-3.5">
               <div className="relative w-10 h-10 rounded-xl bg-white flex items-center justify-center overflow-hidden border border-violet-200 shadow-2xs shrink-0">
                 <img
                   src={jimmRobotImg}
-                  alt="Jimm AI Coach"
+                  alt="Jimm Fitness Coach"
                   className="w-full h-full object-cover"
                 />
                 <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#7C3AED] border-2 border-white"></span>
@@ -205,7 +204,7 @@ export function Sidebar({
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-1.5">
                   <span className="font-heading font-black text-xs text-[#101828] truncate">
-                    Ask Jimm AI
+                    Ask Jimm
                   </span>
                   <Sparkles size={11} className="text-[#7C3AED] fill-[#7C3AED] shrink-0" />
                 </div>
@@ -223,7 +222,7 @@ export function Sidebar({
               }}
               className="w-full flex items-center justify-center gap-1.5 py-2.5 px-3.5 rounded-xl bg-[#7C3AED] hover:bg-[#5B21B6] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
             >
-              <span>Chat with Jimm AI →</span>
+              <span>Chat with Jimm →</span>
             </button>
           </div>
         </div>
@@ -289,19 +288,6 @@ export function Sidebar({
             </span>
           </div>
           <Settings size={15} className="text-[#667085] hover:text-[#101828] shrink-0" />
-        </button>
-        <button
-          type="button"
-          aria-label="Sign out"
-          title="Sign out"
-          onClick={async () => {
-            await logout();
-            navigate('/auth', { replace: true });
-            handleNavClick();
-          }}
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-[#777184] transition hover:bg-rose-50 hover:text-rose-600"
-        >
-          <LogOut size={16} />
         </button>
         </div>
       </div>

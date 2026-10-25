@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useActiveWorkout } from '../../hooks/useActiveWorkout';
 import { useWorkout } from '../../hooks/useWorkout';
 import { useAuth } from '../../hooks/useAuth';
+import { getTodayString } from '../../lib/date-utils';
+import { mockApi } from '../../api/mock-adapter';
 import { Button } from '../ui/Button';
 import { X, Send, Bot, Sparkles, Dumbbell, ArrowRight } from 'lucide-react';
 import type { WorkoutDay, PlanExercise } from '../../types';
@@ -30,12 +32,40 @@ const PRESET_PROMPTS = [
   'Suggest high-protein vegetarian meal ideas',
 ];
 
+async function coachFromLocalData(question: string, athleteName: string, experience: string) {
+  const [split, sessions, goals, meals] = await Promise.all([
+    mockApi.getActiveSplit(),
+    mockApi.getSessions(),
+    mockApi.getNutritionGoals(),
+    mockApi.getMealsByDate(getTodayString()),
+  ]);
+  const q = question.toLowerCase();
+  const recent = sessions.slice(0, 3).map((session) => session.dayName || session.splitName).filter(Boolean);
+  const mealTotals = meals.reduce((total, meal) => ({
+    calories: total.calories + meal.totalCalories,
+    protein: total.protein + meal.totalProtein,
+  }), { calories: 0, protein: 0 });
+  const context = `${athleteName} is ${experience}; daily targets are ${goals.calorieTarget} kcal and ${goals.proteinTarget} g protein. Today's food log: ${mealTotals.calories} kcal and ${mealTotals.protein} g protein. Active plan: ${split?.name || 'none'}${recent.length ? `; recent sessions: ${recent.join(', ')}` : ''}.`;
+
+  if (/(calorie|cut|deficit|surplus|macro|protein|carb|fat|meal|diet|nutrition)/.test(q)) {
+    const remaining = Math.max(0, goals.proteinTarget - mealTotals.protein);
+    return `Coach check-in: ${context}\n\nAim to stay near your calorie target and spread protein across 3–5 meals. You have about ${remaining} g of your protein target left based on today's log. For fat loss, use a modest 300–500 kcal daily deficit and adjust from 2–3 weeks of weight trends; avoid aggressive cuts that hurt training and recovery.`;
+  }
+  if (/(workout|chest|back|leg|arm|shoulder|routine|train|exercise)/.test(q)) {
+    return `Let's build this around quality reps and recoverable volume. ${context}\n\nUse 3–4 main movements, 3 working sets each, and finish with 2–3 accessories. Keep most sets at 1–3 reps in reserve, rest 2–3 minutes on compound lifts, and add reps before adding load. Allow at least 48 hours before training the same muscle hard again.`;
+  }
+  if (/(plateau|stuck|progress|overload|bench|strength)/.test(q)) {
+    return `For a plateau, check technique, sleep, nutrition, and whether reps or load have moved over the last few weeks. ${context}\n\nKeep the same lift for another 2–3 exposures, add reps within your target range, then increase load by the smallest available step. If performance is falling across sessions, take a deload week at roughly half your usual sets.`;
+  }
+  return `Hi ${athleteName}. I can help with training, recovery, or nutrition using your locally saved profile and logs. ${context}\n\nTell me your goal and available equipment, and I'll suggest a practical next step. Keep every set controlled and stop if you feel sharp pain.`;
+}
+
 export function AskJimmDrawer({ isOpen, onClose }: AskJimmDrawerProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'm_welcome',
       sender: 'jimm',
-      text: "Hey! I'm Jimm, your VYQOR AI coach. I can build customized workouts, analyze your double progressive overload trends, fix form plateaus, or fine-tune your macros. What's on your mind today?",
+      text: "Hey! I'm Jimm, your VYQOR training coach. I can suggest practical workouts and nutrition adjustments using the profile and logs saved in this browser. What's your goal today?",
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     },
   ]);
@@ -52,9 +82,9 @@ export function AskJimmDrawer({ isOpen, onClose }: AskJimmDrawerProps) {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping]);
 
-  const handleSend = (textToSend?: string) => {
-    const query = textToSend || inputValue;
-    if (!query.trim()) return;
+  const handleSend = async (textToSend?: string) => {
+    const query = (textToSend || inputValue).trim();
+    if (!query || isTyping) return;
 
     const userMsg: Message = {
       id: `usr_${Date.now()}`,
@@ -62,57 +92,35 @@ export function AskJimmDrawer({ isOpen, onClose }: AskJimmDrawerProps) {
       text: query,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
-
     setMessages((prev) => [...prev, userMsg]);
     if (!textToSend) setInputValue('');
     setIsTyping(true);
 
-    setTimeout(() => {
-      generateJimmResponse(query);
+    try {
+      const reply = await coachFromLocalData(
+        query,
+        user?.displayName || user?.name || 'Athlete',
+        user?.experienceLevel || 'intermediate',
+      );
+
+      setMessages((prev) => [...prev, {
+        id: `jimm_${Date.now()}`,
+        sender: 'jimm',
+        text: reply,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      }]);
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : 'The coach is unavailable right now.';
+      setMessages((prev) => [...prev, {
+        id: `jimm_error_${Date.now()}`,
+        sender: 'jimm',
+        text: `I couldn't reach the coach service: ${detail}`,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      }]);
+    } finally {
       setIsTyping(false);
-    }, 900);
-  };
-
-  const generateJimmResponse = (userQuery: string) => {
-    const q = userQuery.toLowerCase();
-    let replyText = '';
-    let planData: Message['workoutPlan'] | undefined = undefined;
-
-    if (q.includes('chest') || q.includes('workout') || q.includes('routine')) {
-      replyText =
-        "Here is a high-stimulus 45-minute Chest & Triceps routine designed around double progression. Focus on taking your top set 1 rep shy of failure (RPE 9):";
-      planData = {
-        name: 'Jimm Custom: Chest & Triceps Blast',
-        exercises: [
-          { name: 'Barbell Bench Press', sets: 4, reps: '6-8', rest: 120 },
-          { name: 'Incline Dumbbell Press', sets: 3, reps: '8-10', rest: 90 },
-          { name: 'Cable Crossover (Upper to Lower)', sets: 3, reps: '12-15', rest: 60 },
-          { name: 'Tricep Pushdown (Straight Bar)', sets: 3, reps: '10-12', rest: 60 },
-          { name: 'Overhead Dumbbell Tricep Extension', sets: 3, reps: '10-12', rest: 75 },
-        ],
-      };
-    } else if (q.includes('bench') || q.includes('plateau')) {
-      replyText =
-        "To break through a bench plateau, apply these 3 double progression rules:\n\n1. **Micro-load**: Jump by +1.25 kg to +2.5 kg rather than standard jumps.\n2. **Pause your reps**: Introduce a 1-second chest pause on the first 2 sets to eliminate rebound inertia.\n3. **Tricep lock-out volume**: Add 3 sets of close-grip bench or heavy cable extensions to strengthen the terminal lockout.";
-    } else if (q.includes('deficit') || q.includes('cut') || q.includes('fat loss')) {
-      replyText =
-        "For optimal body recomposition and fat loss without muscle wasting:\n\n• **Calorie Deficit**: 350–500 kcal below maintenance (~0.4 to 0.5 kg loss/week).\n• **Protein Target**: 2.0g – 2.2g per kg of body weight to safeguard lean mass.\n• **Progression Rule**: Maintain heavy weights on your compounds — only drop volume if recovery lags.";
-    } else {
-      replyText =
-        "Great question! For elite physique development, consistency and progressive overload trump everything. Every session you step into, aim to add either 1 rep or a micro-jump in weight over your previous log. Would you like me to build a targeted workout for you right now?";
     }
-
-    const aiMsg: Message = {
-      id: `jimm_${Date.now()}`,
-      sender: 'jimm',
-      text: replyText,
-      workoutPlan: planData,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-    };
-
-    setMessages((prev) => [...prev, aiMsg]);
   };
-
   const handleLoadWorkout = async (plan: NonNullable<Message['workoutPlan']>) => {
     const planExercises: PlanExercise[] = plan.exercises.map((e, idx) => ({
       id: `jimm_pe_${idx}_${Date.now()}`,
@@ -135,7 +143,7 @@ export function AskJimmDrawer({ isOpen, onClose }: AskJimmDrawerProps) {
     await createSplit({
       userId: user?.id || '',
       name: `AI: ${plan.name}`,
-      description: 'Custom split generated by Jimm AI Coach',
+      description: 'Custom split suggested by Jimm Fitness Coach',
       isTemplate: false,
       isActive: true,
       days: [workoutDay],
@@ -167,7 +175,7 @@ export function AskJimmDrawer({ isOpen, onClose }: AskJimmDrawerProps) {
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-heading font-extrabold text-base text-text-primary">
-                  Jimm AI Coach
+                  Jimm Fitness Coach
                 </h3>
                 <span className="w-2 h-2 rounded-full bg-success animate-pulse"></span>
               </div>
@@ -217,7 +225,7 @@ export function AskJimmDrawer({ isOpen, onClose }: AskJimmDrawerProps) {
                         <div key={idx} className="flex justify-between text-text-secondary">
                           <span>{ex.name}</span>
                           <span className="font-mono text-text-muted">
-                            {ex.sets} × {ex.reps}
+                            {ex.sets} Ã— {ex.reps}
                           </span>
                         </div>
                       ))}

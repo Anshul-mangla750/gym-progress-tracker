@@ -113,7 +113,7 @@ export function AppLayout() {
         </div>
       )}
 
-      {/* Jimm AI Coach Drawer */}
+      {/* Jimm Fitness Coach Drawer */}
       <AskJimmDrawer isOpen={isJimmOpen} onClose={() => setIsJimmOpen(false)} />
 
       {/* Goal Pace & Profile Modal */}

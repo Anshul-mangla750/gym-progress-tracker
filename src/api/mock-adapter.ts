@@ -12,7 +12,6 @@ import { seedExercises } from '../data/seed-exercises';
 import { seedFoods } from '../data/seed-foods';
 import { seedSplits } from '../data/seed-splits';
 import { calculateDailyTotals } from '../lib/nutrition-calc';
-import { supabase } from '../lib/supabase';
 
 const STORAGE_KEYS = {
   USER: 'eliteengine_user_v4',
@@ -59,7 +58,15 @@ const DEFAULT_GOAL: NutritionGoal = {
   createdAt: new Date().toISOString(),
 };
 
-let storageUserId: string | null = null;
+// Reuse an account-scoped local cache left by earlier versions when available.
+let storageUserId: string | null = (() => {
+  try {
+    const userKey = Object.keys(localStorage).find((key) => key.startsWith(`${STORAGE_KEYS.USER}_`));
+    return userKey?.slice(`${STORAGE_KEYS.USER}_`.length) || null;
+  } catch {
+    return null;
+  }
+})();
 
 function scopedStorageKey(key: string): string {
   return storageUserId ? `${key}_${storageUserId}` : key;
@@ -82,18 +89,6 @@ function setStorage<T>(key: string, value: T): void {
     console.error('Storage write error:', err);
   }
 
-  const userId = storageUserId;
-  if (userId && supabase) {
-    void supabase
-      .from('vyqor_user_data')
-      .upsert(
-        { user_id: userId, data_key: key, payload: value, updated_at: new Date().toISOString() },
-        { onConflict: 'user_id,data_key' }
-      )
-      .then(({ error }) => {
-        if (error) console.error('Failed to sync VYQOR data:', error.message);
-      });
-  }
 }
 
 // ── Mock Database Initialization ──────────────────────────────────────────
@@ -141,28 +136,6 @@ export function initMockStorage() {
   const bodyWeights = getStorage<BodyWeightEntry[]>(STORAGE_KEYS.BODY_WEIGHTS, []);
   const realBodyWeights = bodyWeights.filter((entry) => !/^bw_\d+$/.test(entry.id));
   if (realBodyWeights.length !== bodyWeights.length) setStorage(STORAGE_KEYS.BODY_WEIGHTS, realBodyWeights);
-}
-
-export async function setMockStorageUser(userId: string | null) {
-  storageUserId = userId;
-  if (!userId) return;
-
-  if (supabase) {
-    const { data, error } = await supabase
-      .from('vyqor_user_data')
-      .select('data_key, payload')
-      .eq('user_id', userId);
-
-    if (error) {
-      console.error('Failed to load VYQOR cloud data:', error.message);
-    } else if (storageUserId === userId) {
-      data.forEach((row) => {
-        localStorage.setItem(scopedStorageKey(row.data_key), JSON.stringify(row.payload));
-      });
-    }
-  }
-
-  if (storageUserId === userId) initMockStorage();
 }
 
 // Automatically ensure seeded data exists
